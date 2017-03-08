@@ -5,7 +5,7 @@
 --%>
 
 
-<%@page import="konti.GalgelegI"%>
+<%@page import="galgeleg.GalgelegI"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Scanner,javax.xml.namespace.QName,javax.xml.ws.Service,java.net.URL,java.net.MalformedURLException" %>
 <!DOCTYPE html>
