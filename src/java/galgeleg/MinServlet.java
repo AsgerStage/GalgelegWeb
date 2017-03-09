@@ -59,12 +59,44 @@ out.println("<head>");
 out.println("<title>Galgeleg</title>");
 out.println("</head>");
 out.println("<body>");
+out.println("<style>"
+        + "body {"
+        + "background-color: #000000;"
+        + "text-align: center;"
+        + "}"
+        
+        + "h1 {"
+        + "color:#20C20E;"
+        + "font-family: Monospace;"
+        + "}"
+        
+        + "p {"
+        + "color:#20C20E;"
+        + "margin-bottom: 2px;"
+        + "}"
+        
+        + "#input2 {"
+        + "margin-bottom: 10px;"
+        + "}"
+        
+        + "#guess {"
+        + "margin-bottom: 10px;"
+        + "margin-top: 10px;"
+        + "}"
+        
+        + "#nytspilknap {"
+        + "margin-top: 10px;"
+        + "}"
+        
+        + "</style>"
+        
+        + "<h1>Don Frankos Mobs Galgeleg</h1>");
 
 if(!g.spilSlut()){
     
-out.println(""+g.logWeb());
+out.println("<p>"+g.logWeb()+"</p>");
 out.println("<form method=\"POST\" action=\"MinServlet\">");
-out.println("<input type=\"String\" id=\"guess\"  name=\"guess\">   <br>");
+out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   <br>");
 //out.println("<p id=\"yourguess\"> dit gæt</p>");
 out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"></form>");
 }
@@ -72,9 +104,9 @@ out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"></form>");
 
 else if(g.spilSlut()){
 
-out.println(""+g.logWeb());
+out.println("<p>"+g.logWeb()+"</p>");
 out.println("<form method=\"POST\" action=\"MinServlet\">");
-out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\"></form>");
+out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
 
 g.nulstil();
     

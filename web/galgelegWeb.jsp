@@ -15,6 +15,27 @@
        <title>Galgeleg</title>
     </head>
     <body>
+    <style>
+        body {
+            background-color: #000000;
+            text-align: center;
+        }
+        h1 {
+            color:#20C20E;
+            font-family: Monospace;
+        }
+        p {
+            color:#20C20E;
+            margin-bottom: 2px;
+
+        }
+        #input2 {
+            margin-bottom: 10px
+        }
+        
+    </style>
+    <h1>Don Frankos Mobs Galgeleg</h1>
+    
         <%
              //local server
        // URL url = new URL("http://localhost:3043/galgelegtjeneste?wsdl");
@@ -32,9 +53,11 @@
   
   if (name == null || pass == null) {
     %>
-      <form method="post">
-    Brugernavn : <input type="text"   name="name">   <br>
-    Adgangskode  : <input type="password"   name="pass">   <br>
+      <form method="post" id="form1">
+          <p>Brugernavn</p>
+          <input type="text"   name="name" id="input1" autofocus>   <br>
+          <p>Adgangskode</p>
+          <input type="password"   name="pass" id="input2">   <br>
                  <input type="submit" name="OK" value="Log ind">
   </form>
     <%
@@ -44,16 +67,16 @@ if(g.hentBruger(name, pass)){
 break;
 }
 else{
-out.println("Forkert bruger eller password");
+out.println("<p>Forkert bruger eller password</p>");
 
 }}
-out.println("Du er nu logget ind");
+out.println("<p>Du er nu logget ind</p>");
 %>
 <br>
                                                                                                     
 <%
         
-out.println(""+g.logWeb());
+//out.println(""+g.logWeb());
    
 %>
 <!--<script>
@@ -64,9 +87,9 @@ function myFunction() {
 
 <form method="POST" action="MinServlet">
          
-    <input type="String" id="guess"  name="guess">   <br><br><br>
+    <!--<input type="String" id="guess"  name="guess">   <br><br><br>-->
     <!--<p id="yourguess"> dit gæt</p>-->
-    <input type="submit" name="guessKnap" value="Gæt">
+    <input type="submit" name="guessKnap" value="Start spil">
 
   </form>
 <%
