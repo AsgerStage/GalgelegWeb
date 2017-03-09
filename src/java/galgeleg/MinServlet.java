@@ -3,7 +3,7 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package konti;
+package galgeleg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Scanner;
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
+import java.net.URL;
+import java.net.MalformedURLException;
+
 
 /**
  *
@@ -33,16 +39,55 @@ public class MinServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MinServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MinServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+//            /* TODO output your page here. You may use following sample code. */
+
+URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
+QName qname = new QName("http://galgeleg/", "GalgelegImplService");
+QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
+Service service = Service.create(url, qname);
+GalgelegI g = service.getPort(qnameport,GalgelegI.class);
+
+
+String guess = request.getParameter("guess");
+g.gætBogstav(""+guess);
+
+
+
+out.println("<!DOCTYPE html>");
+out.println("<html>");
+out.println("<head>");
+out.println("<title>Galgeleg</title>");
+out.println("</head>");
+out.println("<body>");
+
+if(!g.spilSlut()){
+    
+out.println(""+g.logWeb());
+out.println("<form method=\"POST\" action=\"MinServlet\">");
+out.println("<input type=\"String\" id=\"guess\"  name=\"guess\">   <br>");
+//out.println("<p id=\"yourguess\"> dit gæt</p>");
+out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"></form>");
+}
+
+
+else if(g.spilSlut()){
+
+out.println(""+g.logWeb());
+out.println("<form method=\"POST\" action=\"MinServlet\">");
+out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\"></form>");
+
+g.nulstil();
+    
+
+}
+
+out.println("</body>");
+out.println("</html>");
+
+
+
+
+
         }
     }
     
@@ -66,16 +111,16 @@ public class MinServlet extends HttpServlet {
         
         out.println("<label for=\"tal1\"> Første tal </label>");
         out.println("<input type=\"text\" name=\"tal1\">");
-       
+        
         out.println("<label for=\"tal2\"> Andet tal </label>");
         out.println("<input type=\"text\" name=\"tal2\">");
-        out.println("<input type=\"submit\" value=\"Regn det ud!\">");  
+        out.println("<input type=\"submit\" value=\"Regn det ud!\">");
 //        for (int i = 1; i <= 10; i++) {
 //            out.println("Syv gange " + i + " er: " + 7 * i + ".<br>");
 //        }
-        out.println("</body>");
-        out.println("</html>");
-        
+out.println("</body>");
+out.println("</html>");
+
     }
     
     /**

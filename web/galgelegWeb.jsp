@@ -12,15 +12,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-       <title>Udregn to tal!</title>
+       <title>Galgeleg</title>
     </head>
     <body>
         <%
              //local server
-        URL url = new URL("http://localhost:3043/galgelegtjeneste?wsdl");
+       // URL url = new URL("http://localhost:3043/galgelegtjeneste?wsdl");
         
         //jacobs server
-       // URL url = new URL("http://ubuntu4.javabog.dk:9943/galgelegtjeneste?wsdl");
+        URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
         QName qname = new QName("http://galgeleg/", "GalgelegImplService");
               QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
         Service service = Service.create(url, qname);
@@ -32,9 +32,9 @@
   
   if (name == null || pass == null) {
     %>
-      <form>
-    Første tal : <input type="text"   name="name">   <br>
-    Andet tal  : <input type="password"   name="pass">   <br>
+      <form method="post">
+    Brugernavn : <input type="text"   name="name">   <br>
+    Adgangskode  : <input type="password"   name="pass">   <br>
                  <input type="submit" name="OK" value="Log ind">
   </form>
     <%
@@ -48,11 +48,31 @@ out.println("Forkert bruger eller password");
 
 }}
 out.println("Du er nu logget ind");
+%>
+<br>
+                                                                                                    
+<%
+        
+out.println(""+g.logWeb());
+   
+%>
+<!--<script>
+function myFunction() { 
+    document.getElementById("yourguess").innerHTML = document.getElementById("guess").value;
+}
+</script>-->
 
-
-//    int talsum = Integer.parseInt(tal1) + Integer.parseInt(tal2);
+<form method="POST" action="MinServlet">
          
-  }
+    <input type="String" id="guess"  name="guess">   <br><br><br>
+    <!--<p id="yourguess"> dit gæt</p>-->
+    <input type="submit" name="guessKnap" value="Gæt">
+
+  </form>
+<%
+   
+}
     %>
+
     </body>
 </html>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package konti;
+package galgeleg;
 
 import java.util.ArrayList;
 import javax.jws.WebMethod;
@@ -19,6 +19,7 @@ public interface GalgelegI extends java.rmi.Remote {
     @WebMethod public String synligtOrd() throws java.rmi.RemoteException;
     @WebMethod public void gætBogstav(String ord) throws java.rmi.RemoteException;
     @WebMethod public String log() throws java.rmi.RemoteException;
+    @WebMethod public String logWeb() throws java.rmi.RemoteException;
     @WebMethod public boolean spilSlut() throws java.rmi.RemoteException;
     @WebMethod public void nulstil() throws java.rmi.RemoteException;
     @WebMethod public String ordet() throws java.rmi.RemoteException; 
