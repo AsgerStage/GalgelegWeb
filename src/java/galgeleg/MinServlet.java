@@ -92,6 +92,47 @@ out.println("<style>"
         
         + "<h1>Don Frankos Mobs Galgeleg</h1>");
 
+
+String a = g.log();
+int indexstring = a.indexOf("Antal forkerte bogstaver");
+a = a.substring(indexstring+27, indexstring+28);
+int status = Integer.parseInt(a);
+
+switch (status) {
+    case 0:
+        out.println("<img src=\"http://i65.tinypic.com/2cnb88j.png\" border=\"0\" alt=\"Galge\">");
+        break;
+    case 1:
+        out.println("<img src=\"http://i68.tinypic.com/2kem28.png\" border=\"0\" alt=\"forkert 1\">");
+        break;
+    case 2:
+        out.println("<img src=\"http://i67.tinypic.com/2v9c7cy.png\" border=\"0\" alt=\"forkert 2\">");
+        break;
+    case 3:
+        out.println("<img src=\"http://i68.tinypic.com/34exoqh.png\" border=\"0\" alt=\"forkert 3\">");
+        break;
+    case 4:
+        out.println("<img src=\"http://i67.tinypic.com/1z3uxdv.png\" border=\"0\" alt=\"forkert 4\">");
+        break;
+    case 5:
+        out.println("<img src=\"http://i65.tinypic.com/25qxlk8.png\" border=\"0\" alt=\"forkert 5\">");
+        break;
+    case 6:
+        out.println("<img src=\"http://i65.tinypic.com/optn2b.png\" border=\"0\" alt=\"forkert 6\">");
+        break;
+        }
+
+//out.println("<img src=\"http://i65.tinypic.com/2cnb88j.png\" border=\"0\" alt=\"Galge\">");
+//out.println("<img src=\"http://i68.tinypic.com/2kem28.png\" border=\"0\" alt=\"forkert 1\">");
+//out.println("<img src=\"http://i67.tinypic.com/2v9c7cy.png\" border=\"0\" alt=\"forkert 2\">");
+//out.println("<img src=\"http://i68.tinypic.com/34exoqh.png\" border=\"0\" alt=\"forkert 3\">");
+//out.println("<img src=\"http://i67.tinypic.com/1z3uxdv.png\" border=\"0\" alt=\"forkert 4\">");
+//out.println("<img src=\"http://i65.tinypic.com/25qxlk8.png\" border=\"0\" alt=\"forkert 5\">");
+//out.println("<img src=\"http://i65.tinypic.com/optn2b.png\" border=\"0\" alt=\"forkert 6\">");
+
+
+
+
 if(!g.spilSlut()){
     
 out.println("<p>"+g.logWeb()+"</p>");
