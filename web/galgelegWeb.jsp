@@ -35,7 +35,7 @@
         
     </style>
     <h1>Don Frankos Mobs Galgeleg</h1>
-    <img src="https://i.gyazo.com/415abe6259f3857d23520968937c5f65.png" alt="cat">
+    <img src="https://i.gyazo.com/415abe6259f3857d23520968937c5f65.png" alt="Don Franko">
 
     
         <%
