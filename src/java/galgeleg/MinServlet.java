@@ -96,7 +96,13 @@ out.println("<style>"
 String a = g.log();
 int indexstring = a.indexOf("Antal forkerte bogstaver");
 a = a.substring(indexstring+27, indexstring+28);
-int status = Integer.parseInt(a);
+int status = 7;
+try {
+    status = Integer.parseInt(a);
+} catch (NumberFormatException e) {
+    status = 7;
+}
+
 
 switch (status) {
     case 0:
