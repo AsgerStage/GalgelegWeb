@@ -40,7 +40,7 @@
     
         <%
              //local server
-       // URL url = new URL("http://localhost:3043/galgelegtjeneste?wsdl");
+       // URL url = new URL("http://localhost:9943/galgelegtjeneste?wsdl");
         
         //jacobs server
         URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
