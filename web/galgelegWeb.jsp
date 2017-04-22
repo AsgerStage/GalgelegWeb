@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="brugerautorisation.data.Bruger"%>
+<%@page import="brugerautorisation.transport.soap.Brugeradmin"%>
 <%@page import="galgeleg.GalgelegI"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Scanner,javax.xml.namespace.QName,javax.xml.ws.Service,java.net.URL,java.net.MalformedURLException" %>
@@ -43,11 +45,18 @@
        // URL url = new URL("http://localhost:9943/galgelegtjeneste?wsdl");
         
         //jacobs server
-        URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
+        URL url = new URL("http://ubuntu4.javabog.dk:4206/galgelegtjeneste?wsdl");
         QName qname = new QName("http://galgeleg/", "GalgelegImplService");
               QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
         Service service = Service.create(url, qname);
         GalgelegI g = service.getPort(qnameport,GalgelegI.class);
+        
+        
+        
+        URL url1 = new URL("http://javabog.dk:9901/brugeradmin?wsdl");
+        QName qname1 = new QName("http://soap.transport.brugerautorisation/", "BrugeradminImplService");
+        Service service2 = Service.create(url1, qname1);
+        Brugeradmin ba = service2.getPort(Brugeradmin.class);
         
   String name = request.getParameter("name");
   String pass = request.getParameter("pass");
@@ -64,14 +73,28 @@
   </form>
     <%
   } else {
-while(true){
-if(g.hentBruger(name, pass)){
-break;
-}
-else{
-out.println("<p>Forkert bruger eller password</p>");
-
-}}
+        while(true){
+            Bruger user;
+            Boolean loggedin = false;
+            try {
+                user = ba.hentBruger(name, pass);
+                g.playerCheck(name);
+                
+                if (user.brugernavn.equals(name) && user.adgangskode.equals(pass)) {
+                    loggedin = true;
+                }
+                    
+            } catch(Exception e) {
+                System.out.println("Forkert login - prøv igen");
+            }
+//            if(g.hentBruger(name, pass)){
+            if (loggedin) {
+                break;
+            }
+            else {
+                out.println("<p>Forkert bruger eller password</p>");
+            }
+        }
 out.println("<p>Du er nu logget ind</p>");
 %>
 <br>
@@ -79,6 +102,7 @@ out.println("<p>Du er nu logget ind</p>");
 <%
         
 //out.println(""+g.logWeb());
+//out.println("<p>"+name+"</p>");
    
 %>
 <!--<script>
@@ -91,7 +115,9 @@ function myFunction() {
          
     <!--<input type="String" id="guess"  name="guess">   <br><br><br>-->
     <!--<p id="yourguess"> dit gæt</p>-->
-    <input type="submit" name="guessKnap" value="Start spil">
+    <input type="text" name="name" value="<%out.println(name);%>" readonly/>
+    
+    <input type="submit" name="guessKnap" value="Forsæt til spillet">
 
   </form>
 <%

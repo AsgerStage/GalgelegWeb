@@ -14,14 +14,36 @@ import javax.jws.WebService;
  * @author Martin
  */
 @WebService
-public interface GalgelegI extends java.rmi.Remote {
+public interface GalgelegI // extends java.rmi.Remote
+{
     
-    @WebMethod public String synligtOrd() throws java.rmi.RemoteException;
-    @WebMethod public void gætBogstav(String ord) throws java.rmi.RemoteException;
-    @WebMethod public String log() throws java.rmi.RemoteException;
-    @WebMethod public String logWeb() throws java.rmi.RemoteException;
-    @WebMethod public boolean spilSlut() throws java.rmi.RemoteException;
-    @WebMethod public void nulstil() throws java.rmi.RemoteException;
-    @WebMethod public String ordet() throws java.rmi.RemoteException; 
-    @WebMethod boolean hentBruger(String brugernavn, String password) throws java.rmi.RemoteException;     
+//    @WebMethod public String synligtOrd() throws java.rmi.RemoteException;
+//    @WebMethod public void gætBogstav(String ord) throws java.rmi.RemoteException;
+//    @WebMethod public String log() throws java.rmi.RemoteException;
+//    @WebMethod public String logWeb() throws java.rmi.RemoteException;
+//    @WebMethod public boolean spilSlut() throws java.rmi.RemoteException;
+//    @WebMethod public void nulstil() throws java.rmi.RemoteException;
+//    @WebMethod public String ordet() throws java.rmi.RemoteException; 
+//    @WebMethod boolean hentBruger(String brugernavn, String password) throws java.rmi.RemoteException;
+//    
+    
+    @WebMethod public String synligtOrd(String brugerID);
+    @WebMethod public void gætBogstav(String ord, String brugerID);
+    @WebMethod public String log(String brugerID);    
+    @WebMethod public String logWeb(String brugerID);
+    @WebMethod public boolean spilSlut();
+    @WebMethod public void nulstil(String brugerID);
+    @WebMethod public String ordet(String brugerID); 
+    @WebMethod boolean hentBruger(String brugernavn, String password); 
+    @WebMethod void playerCheck(String brugernavn); 
+    @WebMethod public Boolean isGameStarted(String brugerID); 
+    @WebMethod public void newMulti(String brugernavn);
+    @WebMethod public ArrayList<String> getMultiListNames();
+    @WebMethod public ArrayList joinMulti(String lobbyName, String brugerID);
+    @WebMethod public void startGame(String brugerID);
+    @WebMethod public String gætBogstavMultiOgLog(String ord, String brugernavn);
+    @WebMethod public Boolean isContinueAvailable(String bruger);
+    @WebMethod public void leaveLobby(String brugerID);
+    
+    
 }

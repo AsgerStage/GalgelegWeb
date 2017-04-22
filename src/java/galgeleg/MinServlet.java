@@ -26,6 +26,9 @@ import java.net.MalformedURLException;
 @WebServlet(name = "MinServlet", urlPatterns = {"/MinServlet"})
 public class MinServlet extends HttpServlet {
     
+    
+    
+    String name;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,13 +38,16 @@ public class MinServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
+    
 
-URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
+URL url = new URL("http://ubuntu4.javabog.dk:4206/galgelegtjeneste?wsdl");
 QName qname = new QName("http://galgeleg/", "GalgelegImplService");
 QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
 Service service = Service.create(url, qname);
@@ -49,7 +55,7 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
 
 
 String guess = request.getParameter("guess");
-g.gætBogstav(""+guess);
+g.gætBogstav(""+guess, name);
 
 
 
@@ -92,8 +98,10 @@ out.println("<style>"
         
         + "<h1>Don Frankos Mobs Galgeleg</h1>");
 
+        
 
-String a = g.log();
+
+String a = g.log(name);
 int indexstring = a.indexOf("Antal forkerte bogstaver");
 a = a.substring(indexstring+27, indexstring+28);
 int status = 7;
@@ -134,21 +142,21 @@ switch (status) {
 
 if(!g.spilSlut()){
     
-out.println("<p>"+g.logWeb()+"</p>");
+out.println("<p>"+g.logWeb(name)+"</p>");
 out.println("<form method=\"POST\" action=\"MinServlet\">");
 out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   <br>");
-//out.println("<p id=\"yourguess\"> dit gæt</p>");
+out.println("<p id=\"yourguess\"> dit gæt</p>");
 out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"></form>");
 }
 
 
 else if(g.spilSlut()){
 
-out.println("<p>"+g.logWeb()+"</p>");
+out.println("<p>"+g.logWeb(name)+"</p>");
 out.println("<form method=\"POST\" action=\"MinServlet\">");
 out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
 
-g.nulstil();
+g.nulstil(name);
     
 
 }
@@ -206,6 +214,7 @@ out.println("</html>");
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        name = request.getParameter("name");
         processRequest(request, response);
     }
     
