@@ -115,7 +115,7 @@ function myFunction() {
          
     <!--<input type="String" id="guess"  name="guess">   <br><br><br>-->
     <!--<p id="yourguess"> dit gæt</p>-->
-    <input type="text" name="name" value="<%out.println(name);%>" readonly/>
+    <input type="text" name="name" value="<%out.println(name);%>" readonly hidden/>
     
     <input type="submit" name="guessKnap" value="Forsæt til spillet">
 
