@@ -45,7 +45,7 @@
        // URL url = new URL("http://localhost:9943/galgelegtjeneste?wsdl");
         
         //jacobs server
-        URL url = new URL("http://ubuntu4.javabog.dk:4206/galgelegtjeneste?wsdl");
+        URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
         QName qname = new QName("http://galgeleg/", "GalgelegImplService");
               QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
         Service service = Service.create(url, qname);

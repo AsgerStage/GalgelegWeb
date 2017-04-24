@@ -47,7 +47,7 @@ public class MinServlet extends HttpServlet {
 //            /* TODO output your page here. You may use following sample code. */
     
 
-URL url = new URL("http://ubuntu4.javabog.dk:4206/galgelegtjeneste?wsdl");
+URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
 QName qname = new QName("http://galgeleg/", "GalgelegImplService");
 QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
 Service service = Service.create(url, qname);
@@ -139,27 +139,33 @@ out.println("<style>"
 
 
 
-String singleEllerMulti = "0";
+//String singleEllerMulti = "0";
+//
+//if (singleEllerMulti.equals("0")) {
 
-if (singleEllerMulti.equals("0")) {
-    
     //Vælg singleplayer eller multiplayer eller log ud
     out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
     out.println("<p id=\"singleEllerMulti\">Vælg en funktion</p>");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Singleplayer\"><br>");
-    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Multiplayer\"><br>");
-    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Tilbage\"></form>");
+    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Singleplayer\"></form><br>");
     
-    singleEllerMulti = request.getParameter("singleMultiTilbage");
-    if (singleEllerMulti.equals("Singleplayer")) {
-        out.print("<p> Du har valgt singleplayer </p>");
-    } else if (singleEllerMulti.equals("Multiplayer")) {
-        out.print("<p> Du har valgt multiplayer </p>");
-    } else {
-        //Her skal den gå tilbage til galgelegWeb.jsp. Det finder vi ud af senereeeeeeee.
-    }
-}
+    out.println("<form method=\"POST\" action=\"MinServlet\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Multiplayer\"></form><br>");
+    
+    out.println("<form method=\"POST\" action=\"galgelegWeb.jsp\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Log ud\"></form>");
+    
+//    singleEllerMulti = request.getParameter("singleMultiTilbage");
+//    if (singleEllerMulti.equals("Singleplayer")) {
+//        out.print("<p> Du har valgt singleplayer </p>");
+//    } else if (singleEllerMulti.equals("Multiplayer")) {
+//        out.print("<p> Du har valgt multiplayer </p>");
+//    } else {
+//        //Her skal den gå tilbage til galgelegWeb.jsp. Det finder vi ud af senereeeeeeee.
+//    }
+//}
 
 //if (singleEllerMulti.equals("Singleplayer")) {
 //    String fortsæt = "0";
@@ -260,22 +266,22 @@ out.println("</html>");
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html>");
-        out.println("<head><title>Syvtabellen - fra en servlet</title></head>");
-        out.println("<body>");
-        
-        out.println("<label for=\"tal1\"> Første tal </label>");
-        out.println("<input type=\"text\" name=\"tal1\">");
-        
-        out.println("<label for=\"tal2\"> Andet tal </label>");
-        out.println("<input type=\"text\" name=\"tal2\">");
-        out.println("<input type=\"submit\" value=\"Regn det ud!\">");
+//        PrintWriter out = response.getWriter();
+//        out.println("<html>");
+//        out.println("<head><title>Syvtabellen - fra en servlet</title></head>");
+//        out.println("<body>");
+//        
+//        out.println("<label for=\"tal1\"> Første tal </label>");
+//        out.println("<input type=\"text\" name=\"tal1\">");
+//        
+//        out.println("<label for=\"tal2\"> Andet tal </label>");
+//        out.println("<input type=\"text\" name=\"tal2\">");
+//        out.println("<input type=\"submit\" value=\"Regn det ud!\">");
 //        for (int i = 1; i <= 10; i++) {
 //            out.println("Syv gange " + i + " er: " + 7 * i + ".<br>");
 //        }
-out.println("</body>");
-out.println("</html>");
+//out.println("</body>");
+//out.println("</html>");
 
     }
     

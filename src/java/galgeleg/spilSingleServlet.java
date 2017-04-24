@@ -20,8 +20,8 @@ import javax.xml.ws.Service;
  *
  * @author magnu
  */
-@WebServlet(name = "singleplayerServlet", urlPatterns = {"/singleplayerServlet"})
-public class spilSingleplayerServlet extends HttpServlet {
+@WebServlet(name = "spilSingleServlet", urlPatterns = {"/spilSingleServlet"})
+public class spilSingleServlet extends HttpServlet {
 
     String name;
     /**
@@ -44,7 +44,7 @@ public class spilSingleplayerServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
                 
-URL url = new URL("http://ubuntu4.javabog.dk:4206/galgelegtjeneste?wsdl");
+URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
 QName qname = new QName("http://galgeleg/", "GalgelegImplService");
 QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
 Service service = Service.create(url, qname);
@@ -52,7 +52,7 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
 
 
 String guess = request.getParameter("guess");
-//g.gætBogstav(""+guess, name);
+g.gætBogstav(""+guess, name);
 
             
             
@@ -99,6 +99,7 @@ String guess = request.getParameter("guess");
         
 //            out.println("<h1>Hej " + name + "</h1>");
             
+
 String a = g.log(name);
 int indexstring = a.indexOf("Antal forkerte bogstaver");
 a = a.substring(indexstring+27, indexstring+28);
@@ -133,26 +134,52 @@ switch (status) {
         out.println("<img src=\"http://i65.tinypic.com/optn2b.png\" border=\"0\" alt=\"forkert 6\">");
         break;
         }            
+
             
             
-            
+    g.playerCheck(name);
     if(!g.spilSlut()){
         //Herfra kører spillet
-        out.println("<p>"+g.logWeb(name)+"</p>");
-        out.println("<form method=\"POST\" action=\"spilSingleplayerServlet\">");
+//        out.println("<p>"+"VI TESTER"+g.synligtOrd(name)+"</p>");
         
+//        out.println("<p>"+"VI TESTER"+g.log(name)+"</p>");
+        
+        out.println("<p>"+g.logWeb(name)+"</p>");
+        out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
         out.println("<p>Dit gæt: </p>");
-        out.println("<input type=\"String\" id=\"guess1\"  name=\"guess\" autofocus>   ");
+        out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   ");
+        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"><br></form>");
     }
     else if(g.spilSlut()){
         out.println("<p>"+g.logWeb(name)+"</p>");
         out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
+        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
         g.nulstil(name);
     }
+    
+    
+//            
             
-            
+//if (g.isContinueAvailable(name) == true) {            
+
+//} else {            
+//    if(!g.spilSlut()){
+//        //Herfra kører spillet
+//        out.println("<p>"+g.logWeb(name)+"</p>");
+//        out.println("<form method=\"POST\" action=\"spilSingleplayerServlet\">");
+//        out.println("<p>Dit gæt: </p>");
+//        out.println("<input type=\"String\" id=\"guess1\"  name=\"guess\" autofocus>   ");
+//        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"><br></form>");
+//    }
+//    else if(g.spilSlut()){
+//        out.println("<p>"+g.logWeb(name)+"</p>");
+//        out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
+//        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
+//        g.nulstil(name);
+//    }
+//}            
             
 // når man forsøger at gætte sker følgende:
 //
