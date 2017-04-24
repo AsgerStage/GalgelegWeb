@@ -108,11 +108,13 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
         
         out.println("<form method=\"POST\" action=\"spilSingleServlet\">"); //spilSingleServlet
         out.println("<p id=\"single\">Du har allerede et igangværende spil, ønsker du at spille videre eller starte et nyt?</p>");
+        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
         out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Fortsæt gammelt spil\"></form>");
         
         out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
         out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstil\" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
         
         

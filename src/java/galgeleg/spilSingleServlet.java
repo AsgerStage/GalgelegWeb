@@ -24,6 +24,7 @@ import javax.xml.ws.Service;
 public class spilSingleServlet extends HttpServlet {
 
     String name;
+    String nulstil = "nej";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -137,7 +138,10 @@ switch (status) {
 
             
             
+    if (nulstil.equals("nulstil")) g.nulstil(name);
     g.playerCheck(name);
+    
+    
     if(!g.spilSlut()){
         //Herfra kører spillet
 //        out.println("<p>"+"VI TESTER"+g.synligtOrd(name)+"</p>");
@@ -229,6 +233,7 @@ switch (status) {
             throws ServletException, IOException {
         
         name = request.getParameter("name");
+        nulstil = request.getParameter("nulstil");
         processRequest(request, response);
     }
 
