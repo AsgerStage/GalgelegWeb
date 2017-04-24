@@ -152,12 +152,14 @@ switch (status) {
         out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
         out.println("<p>Dit gæt: </p>");
         out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   ");
+        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
         out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"><br></form>");
     }
     else if(g.spilSlut()){
         out.println("<p>"+g.logWeb(name)+"</p>");
         out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
+        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
         out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
         g.nulstil(name);
