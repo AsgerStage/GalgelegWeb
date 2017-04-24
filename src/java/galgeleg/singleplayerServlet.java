@@ -105,7 +105,7 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
 //    if (g.isContinueAvailable(name) == true){
         
         
-        
+    if(g.isContinueAvailable(name) != false) {
         out.println("<form method=\"POST\" action=\"spilSingleServlet\">"); //spilSingleServlet
         out.println("<p id=\"single\">Du har allerede et igangværende spil, ønsker du at spille videre eller starte et nyt?</p>");
         out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
@@ -117,11 +117,22 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
         out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstil\" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
         
+        out.println("<form method=\"POST\" action=\"MinServlet\">");
+        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
+        
+    } else if (g.isContinueAvailable(name) == false) {
+        out.println("<p>Du har ikke et igangværende spil, ønsker du at starte et?</p>");
+        out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
+        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstil\" readonly hidden/>");
+        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
         
         out.println("<form method=\"POST\" action=\"MinServlet\">");
         out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
-//    }
+    }
+    
 //    else if (g.isContinueAvailable(name) == false) {
 //        out.println("<form method=\"POST\" action=\"MinServlet\">");
 //        out.println("<p id=\"single2\">Du har ikke et igangværende spil, ønsker du at starte et?</p>");

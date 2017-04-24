@@ -155,6 +155,10 @@ switch (status) {
         out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
         out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"><br></form>");
+        
+        out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
+        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Afslut spil\"></form>");
     }
     else if(g.spilSlut()){
         out.println("<p>"+g.logWeb(name)+"</p>");
@@ -162,6 +166,9 @@ switch (status) {
         out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
         out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
         out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
+        out.println("<form method=\"POST\" action=\"MinServlet\">");
+        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
         g.nulstil(name);
     }
     
