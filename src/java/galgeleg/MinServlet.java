@@ -38,14 +38,14 @@ public class MinServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
+    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
-    
+
 
 URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
 QName qname = new QName("http://galgeleg/", "GalgelegImplService");
@@ -98,7 +98,7 @@ out.println("<style>"
         
         + "<h1>Don Frankos Mobs Galgeleg</h1>");
 
-        
+
 
 
 //String a = g.log(name);
@@ -143,20 +143,20 @@ out.println("<style>"
 //
 //if (singleEllerMulti.equals("0")) {
 
-    //Vælg singleplayer eller multiplayer eller log ud
-    out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
-    out.println("<p id=\"singleEllerMulti\">Vælg en funktion</p>");
-    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Singleplayer\"></form><br>");
-    
-    out.println("<form method=\"POST\" action=\"MinServlet\">");
-    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Multiplayer\"></form><br>");
-    
-    out.println("<form method=\"POST\" action=\"galgelegWeb.jsp\">");
-    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Log ud\"></form>");
-    
+//Vælg singleplayer eller multiplayer eller log ud
+out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
+out.println("<p id=\"singleEllerMulti\">Vælg en funktion</p>");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Singleplayer\"></form><br>");
+
+out.println("<form method=\"POST\" action=\"MinServlet\">");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Multiplayer\"></form><br>");
+
+out.println("<form method=\"POST\" action=\"galgelegWeb.jsp\">");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Log ud\"></form>");
+
 //    singleEllerMulti = request.getParameter("singleMultiTilbage");
 //    if (singleEllerMulti.equals("Singleplayer")) {
 //        out.print("<p> Du har valgt singleplayer </p>");
@@ -182,7 +182,7 @@ out.println("<style>"
 //        out.print("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
 //        out.print("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
 //    }
-//    
+//
 //    fortsæt = request.getParameter("fortsæt");
 //    if (fortsæt.equals("Fortsæt gammelt spil")) {
 //        out.print("<p> Du har valgt at fortsætte dit gamle spil </p>");
@@ -204,15 +204,15 @@ out.println("<style>"
 //        out.println("<p id=\"yourguess\"> dit gæt</p>");
 //        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"></form>");
 //    }
-    
-    
-    
+
+
+
 //    If Request.Form("submitButton") = "Previous Page" Then
 //    ' Code for Previous Page
 //ElseIf Request.Form("submitButton") = "Next Page" Then
 //    ' Code for Next Page
 //End If
-    
+
 //    if (Request.Form("submitButton") == "Previos") {
 //    //update action
 //    } else if (isset($_POST['multiplayerKnap'])) {
@@ -220,11 +220,11 @@ out.println("<style>"
 //    } else {
 //    //no button pressed
 //    }
-    
-    
-    
-    
-    
+
+
+
+
+
 //    if(!g.spilSlut()){
 //        //Herfra kører spillet
 //        out.println("<p>"+g.logWeb(name)+"</p>");
@@ -270,10 +270,10 @@ out.println("</html>");
 //        out.println("<html>");
 //        out.println("<head><title>Syvtabellen - fra en servlet</title></head>");
 //        out.println("<body>");
-//        
+//
 //        out.println("<label for=\"tal1\"> Første tal </label>");
 //        out.println("<input type=\"text\" name=\"tal1\">");
-//        
+//
 //        out.println("<label for=\"tal2\"> Andet tal </label>");
 //        out.println("<input type=\"text\" name=\"tal2\">");
 //        out.println("<input type=\"submit\" value=\"Regn det ud!\">");

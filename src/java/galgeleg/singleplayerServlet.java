@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package galgeleg;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ import javax.xml.ws.Service;
  */
 @WebServlet(name = "singleplayerServlet", urlPatterns = {"/singleplayerServlet"})
 public class singleplayerServlet extends HttpServlet {
-
+    
     String name;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,27 +43,27 @@ public class singleplayerServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-                
-URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
-QName qname = new QName("http://galgeleg/", "GalgelegImplService");
-QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
-Service service = Service.create(url, qname);
-GalgelegI g = service.getPort(qnameport,GalgelegI.class);
-
-
+            
+            URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
+            QName qname = new QName("http://galgeleg/", "GalgelegImplService");
+            QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
+            Service service = Service.create(url, qname);
+            GalgelegI g = service.getPort(qnameport,GalgelegI.class);
+            
+            
 //String guess = request.getParameter("guess");
 //g.gætBogstav(""+guess, name);
 
-            
-            
-            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Galgeleg</title>");          
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<style>"
+
+
+
+out.println("<!DOCTYPE html>");
+out.println("<html>");
+out.println("<head>");
+out.println("<title>Galgeleg</title>");
+out.println("</head>");
+out.println("<body>");
+out.println("<style>"
         + "body {"
         + "background-color: #000000;"
         + "text-align: center;"
@@ -96,52 +96,52 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
         
         + "<h1>Don Frankos Mobs Galgeleg</h1>");
 
-        
+
 //            out.println("<h1>Hej " + name + "</h1>");
-            
-        
+
+
 
 //    String fortsæt = "0";
 //    if (g.isContinueAvailable(name) == true){
-        
-        
-    if(g.isContinueAvailable(name) != false) {
-        out.println("<form method=\"POST\" action=\"spilSingleServlet\">"); //spilSingleServlet
-        out.println("<p id=\"single\">Du har allerede et igangværende spil, ønsker du at spille videre eller starte et nyt?</p>");
-        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Fortsæt gammelt spil\"></form>");
-        
-        out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstil\" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
-        
-        out.println("<form method=\"POST\" action=\"MinServlet\">");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
-        
-    } else if (g.isContinueAvailable(name) == false) {
-        out.println("<p>Du har ikke et igangværende spil, ønsker du at starte et?</p>");
-        out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstil\" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
-        
-        out.println("<form method=\"POST\" action=\"MinServlet\">");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
-    }
+
+
+if(g.isContinueAvailable(name) != false) {
+    out.println("<form method=\"POST\" action=\"spilSingleServlet\">"); //spilSingleServlet
+    out.println("<p id=\"single\">Du har allerede et igangværende spil, ønsker du at spille videre eller starte et nyt?</p>");
+    out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Fortsæt gammelt spil\"></form>");
     
+    out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstil\" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
+    
+    out.println("<form method=\"POST\" action=\"MinServlet\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
+    
+} else if (g.isContinueAvailable(name) == false) {
+    out.println("<p>Du har ikke et igangværende spil, ønsker du at starte et?</p>");
+    out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstil\" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
+    
+    out.println("<form method=\"POST\" action=\"MinServlet\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
+}
+
 //    else if (g.isContinueAvailable(name) == false) {
 //        out.println("<form method=\"POST\" action=\"MinServlet\">");
 //        out.println("<p id=\"single2\">Du har ikke et igangværende spil, ønsker du at starte et?</p>");
 //        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
-//        
+//
 //        out.println("<form method=\"POST\" action=\"MinServlet\">");
 //        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
 //    }
-    
+
 
 
 
@@ -149,18 +149,18 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
 //    out.println("<p id=\"singleEllerMulti\">Vælg en funktion</p>");
 //    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
 //    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Singleplayer\"></form><br>");
-//    
+//
 //    out.println("<form method=\"POST\" action=\"MinServlet\">");
 //    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
 //    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Multiplayer\"></form><br>");
-//    
+//
 //    out.println("<form method=\"POST\" action=\"galgelegWeb.jsp\">");
 //    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
 //    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Log ud\"></form>");
-    
-    
-    
-    
+
+
+
+
 //    fortsæt = request.getParameter("fortsæt");
 //    if (fortsæt.equals("Fortsæt gammelt spil")) {
 //        out.print("<p> Du har valgt at fortsætte dit gamle spil </p>");
@@ -170,22 +170,22 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
 //        //Her skal den gå tilbage til galgelegWeb.jsp. Det finder vi ud af senereeeeeeee.
 //    }
 //
-//            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            out.println("</body>");
-            out.println("</html>");
+//
+
+
+
+
+
+
+
+
+
+
+out.println("</body>");
+out.println("</html>");
         }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -200,7 +200,7 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -216,7 +216,7 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
         name = request.getParameter("name");
         processRequest(request, response);
     }
-
+    
     /**
      * Returns a short description of the servlet.
      *
@@ -226,5 +226,5 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
 }

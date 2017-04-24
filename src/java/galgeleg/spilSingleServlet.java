@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package galgeleg;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ import javax.xml.ws.Service;
  */
 @WebServlet(name = "spilSingleServlet", urlPatterns = {"/spilSingleServlet"})
 public class spilSingleServlet extends HttpServlet {
-
+    
     String name;
     String nulstil = "nej";
     /**
@@ -44,62 +44,62 @@ public class spilSingleServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-                
-URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
-QName qname = new QName("http://galgeleg/", "GalgelegImplService");
-QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
-Service service = Service.create(url, qname);
-GalgelegI g = service.getPort(qnameport,GalgelegI.class);
-
-
-String guess = request.getParameter("guess");
-g.gætBogstav(""+guess, name);
-
+            
+            URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
+            QName qname = new QName("http://galgeleg/", "GalgelegImplService");
+            QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
+            Service service = Service.create(url, qname);
+            GalgelegI g = service.getPort(qnameport,GalgelegI.class);
+            
+            
+            String guess = request.getParameter("guess");
+            g.gætBogstav(""+guess, name);
+            
             
             
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Galgeleg</title>");          
+            out.println("<title>Galgeleg</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<style>"
-        + "body {"
-        + "background-color: #000000;"
-        + "text-align: center;"
-        + "}"
-        
-        + "h1 {"
-        + "color:#20C20E;"
-        + "font-family: Monospace;"
-        + "}"
-        
-        + "p {"
-        + "color:#20C20E;"
-        + "margin-bottom: 2px;"
-        + "}"
-        
-        + "#input2 {"
-        + "margin-bottom: 10px;"
-        + "}"
-        
-        + "#guess {"
-        + "margin-bottom: 10px;"
-        + "margin-top: 10px;"
-        + "}"
-        
-        + "#nytspilknap {"
-        + "margin-top: 10px;"
-        + "}"
-        
-        + "</style>"
-        
-        + "<h1>Don Frankos Mobs Galgeleg</h1>");
-
-        
-//            out.println("<h1>Hej " + name + "</h1>");
+                    + "body {"
+                    + "background-color: #000000;"
+                    + "text-align: center;"
+                    + "}"
+                    
+                    + "h1 {"
+                    + "color:#20C20E;"
+                    + "font-family: Monospace;"
+                    + "}"
+                    
+                    + "p {"
+                    + "color:#20C20E;"
+                    + "margin-bottom: 2px;"
+                    + "}"
+                    
+                    + "#input2 {"
+                    + "margin-bottom: 10px;"
+                    + "}"
+                    
+                    + "#guess {"
+                    + "margin-bottom: 10px;"
+                    + "margin-top: 10px;"
+                    + "}"
+                    
+                    + "#nytspilknap {"
+                    + "margin-top: 10px;"
+                    + "}"
+                    
+                    + "</style>"
+                    
+                    + "<h1>Don Frankos Mobs Galgeleg</h1>");
             
+            
+//            out.println("<h1>Hej " + name + "</h1>");
+
 
 String a = g.log(name);
 int indexstring = a.indexOf("Antal forkerte bogstaver");
@@ -134,50 +134,50 @@ switch (status) {
     case 6:
         out.println("<img src=\"http://i65.tinypic.com/optn2b.png\" border=\"0\" alt=\"forkert 6\">");
         break;
-        }            
+}
 
-            
-            
-    if (nulstil.equals("nulstil")) g.nulstil(name);
-    g.playerCheck(name);
-    
-    
-    if(!g.spilSlut()){
-        //Herfra kører spillet
+
+
+if (nulstil.equals("nulstil")) g.nulstil(name);
+g.playerCheck(name);
+
+
+if(!g.spilSlut()){
+    //Herfra kører spillet
 //        out.println("<p>"+"VI TESTER"+g.synligtOrd(name)+"</p>");
-        
-//        out.println("<p>"+"VI TESTER"+g.log(name)+"</p>");
-        
-        out.println("<p>"+g.logWeb(name)+"</p>");
-        out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
-        out.println("<p>Dit gæt: </p>");
-        out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   ");
-        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"><br></form>");
-        
-        out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Afslut spil\"></form>");
-    }
-    else if(g.spilSlut()){
-        out.println("<p>"+g.logWeb(name)+"</p>");
-        out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
-        out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
-        out.println("<form method=\"POST\" action=\"MinServlet\">");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
-        g.nulstil(name);
-    }
-    
-    
-//            
-            
-//if (g.isContinueAvailable(name) == true) {            
 
-//} else {            
+//        out.println("<p>"+"VI TESTER"+g.log(name)+"</p>");
+
+out.println("<p>"+g.logWeb(name)+"</p>");
+out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
+out.println("<p>Dit gæt: </p>");
+out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   ");
+out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"><br></form>");
+
+out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Afslut spil\"></form>");
+}
+else if(g.spilSlut()){
+    out.println("<p>"+g.logWeb(name)+"</p>");
+    out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
+    out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
+    out.println("<form method=\"POST\" action=\"MinServlet\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
+    g.nulstil(name);
+}
+
+
+//
+
+//if (g.isContinueAvailable(name) == true) {
+
+//} else {
 //    if(!g.spilSlut()){
 //        //Herfra kører spillet
 //        out.println("<p>"+g.logWeb(name)+"</p>");
@@ -192,8 +192,8 @@ switch (status) {
 //        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
 //        g.nulstil(name);
 //    }
-//}            
-            
+//}
+
 // når man forsøger at gætte sker følgende:
 //
 // type Status report
@@ -202,18 +202,18 @@ switch (status) {
 //
 // descriptionThe requested resource is not available.
 
-            
-            
-            
-            
-            
-            
-            
-            out.println("</body>");
-            out.println("</html>");
+
+
+
+
+
+
+
+out.println("</body>");
+out.println("</html>");
         }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -228,7 +228,7 @@ switch (status) {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -245,7 +245,7 @@ switch (status) {
         nulstil = request.getParameter("nulstil");
         processRequest(request, response);
     }
-
+    
     /**
      * Returns a short description of the servlet.
      *
@@ -255,5 +255,5 @@ switch (status) {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
 }
