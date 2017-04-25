@@ -61,41 +61,11 @@ public class spilSingleServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">");
             out.println("<title>Galgeleg</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<style>"
-                    + "body {"
-                    + "background-color: #000000;"
-                    + "text-align: center;"
-                    + "}"
-                    
-                    + "h1 {"
-                    + "color:#20C20E;"
-                    + "font-family: Monospace;"
-                    + "}"
-                    
-                    + "p {"
-                    + "color:#20C20E;"
-                    + "margin-bottom: 2px;"
-                    + "}"
-                    
-                    + "#input2 {"
-                    + "margin-bottom: 10px;"
-                    + "}"
-                    
-                    + "#guess {"
-                    + "margin-bottom: 10px;"
-                    + "margin-top: 10px;"
-                    + "}"
-                    
-                    + "#nytspilknap {"
-                    + "margin-top: 10px;"
-                    + "}"
-                    
-                    + "</style>"
-                    
-                    + "<h1>Don Frankos Mobs Galgeleg</h1>");
+            out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
             
             
 //            out.println("<h1>Hej " + name + "</h1>");
@@ -114,10 +84,10 @@ try {
 
 switch (status) {
     case 0:
-        out.println("<img src=\"http://i65.tinypic.com/2cnb88j.png\" border=\"0\" alt=\"Galge\">");
+        out.println("<img src=\"http://i66.tinypic.com/351ts0z.png\" border=\"0\" alt=\"Galge\">");
         break;
     case 1:
-        out.println("<img src=\"http://i68.tinypic.com/2kem28.png\" border=\"0\" alt=\"forkert 1\">");
+        out.println("<img src=\"http://i66.tinypic.com/2mw5r37.png\" border=\"0\" alt=\"forkert 1\">");
         break;
     case 2:
         out.println("<img src=\"http://i67.tinypic.com/2v9c7cy.png\" border=\"0\" alt=\"forkert 2\">");
@@ -135,6 +105,31 @@ switch (status) {
         out.println("<img src=\"http://i65.tinypic.com/optn2b.png\" border=\"0\" alt=\"forkert 6\">");
         break;
 }
+
+//Hvide billeder:
+//switch (status) {
+//    case 0:
+//        out.println("<img src=\"http://i65.tinypic.com/2cnb88j.png\" border=\"0\" alt=\"Galge\">");
+//        break;
+//    case 1:
+//        out.println("<img src=\"http://i68.tinypic.com/2kem28.png\" border=\"0\" alt=\"forkert 1\">");
+//        break;
+//    case 2:
+//        out.println("<img src=\"http://i67.tinypic.com/2v9c7cy.png\" border=\"0\" alt=\"forkert 2\">");
+//        break;
+//    case 3:
+//        out.println("<img src=\"http://i68.tinypic.com/34exoqh.png\" border=\"0\" alt=\"forkert 3\">");
+//        break;
+//    case 4:
+//        out.println("<img src=\"http://i67.tinypic.com/1z3uxdv.png\" border=\"0\" alt=\"forkert 4\">");
+//        break;
+//    case 5:
+//        out.println("<img src=\"http://i65.tinypic.com/25qxlk8.png\" border=\"0\" alt=\"forkert 5\">");
+//        break;
+//    case 6:
+//        out.println("<img src=\"http://i65.tinypic.com/optn2b.png\" border=\"0\" alt=\"forkert 6\">");
+//        break;
+//}
 
 
 
@@ -154,7 +149,7 @@ out.println("<p>Dit gæt: </p>");
 out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   ");
 out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"><br></form>");
+out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"></form><br>");
 
 out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");

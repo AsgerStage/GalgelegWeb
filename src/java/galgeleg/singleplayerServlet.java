@@ -60,41 +60,11 @@ public class singleplayerServlet extends HttpServlet {
 out.println("<!DOCTYPE html>");
 out.println("<html>");
 out.println("<head>");
+out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">");
 out.println("<title>Galgeleg</title>");
 out.println("</head>");
 out.println("<body>");
-out.println("<style>"
-        + "body {"
-        + "background-color: #000000;"
-        + "text-align: center;"
-        + "}"
-        
-        + "h1 {"
-        + "color:#20C20E;"
-        + "font-family: Monospace;"
-        + "}"
-        
-        + "p {"
-        + "color:#20C20E;"
-        + "margin-bottom: 2px;"
-        + "}"
-        
-        + "#input2 {"
-        + "margin-bottom: 10px;"
-        + "}"
-        
-        + "#guess {"
-        + "margin-bottom: 10px;"
-        + "margin-top: 10px;"
-        + "}"
-        
-        + "#nytspilknap {"
-        + "margin-top: 10px;"
-        + "}"
-        
-        + "</style>"
-        
-        + "<h1>Don Frankos Mobs Galgeleg</h1>");
+out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 
 
 //            out.println("<h1>Hej " + name + "</h1>");
@@ -107,30 +77,30 @@ out.println("<style>"
 
 if(g.isContinueAvailable(name) != false) {
     out.println("<form method=\"POST\" action=\"spilSingleServlet\">"); //spilSingleServlet
-    out.println("<p id=\"single\">Du har allerede et igangværende spil, ønsker du at spille videre eller starte et nyt?</p>");
+    out.println("<p id=\"single\">Du har allerede et igangværende spil.<br>Ønsker du at spille videre eller starte et nyt?</p><br>");
     out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Fortsæt gammelt spil\"></form>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Fortsæt gammelt spil\"></form><br>");
     
     out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
     out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstil\" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form><br>");
     
     out.println("<form method=\"POST\" action=\"MinServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
     
 } else if (g.isContinueAvailable(name) == false) {
-    out.println("<p>Du har ikke et igangværende spil, ønsker du at starte et?</p>");
+    out.println("<p>Du har ikke et igangværende spil.<br>Ønsker du at starte et?</p><br>");
     out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
     out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstil\" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form><br>");
     
     out.println("<form method=\"POST\" action=\"MinServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
 }
 
 //    else if (g.isContinueAvailable(name) == false) {

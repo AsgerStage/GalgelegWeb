@@ -62,41 +62,11 @@ GalgelegI g = service.getPort(qnameport,GalgelegI.class);
 out.println("<!DOCTYPE html>");
 out.println("<html>");
 out.println("<head>");
+out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">");
 out.println("<title>Galgeleg</title>");
 out.println("</head>");
 out.println("<body>");
-out.println("<style>"
-        + "body {"
-        + "background-color: #000000;"
-        + "text-align: center;"
-        + "}"
-        
-        + "h1 {"
-        + "color:#20C20E;"
-        + "font-family: Monospace;"
-        + "}"
-        
-        + "p {"
-        + "color:#20C20E;"
-        + "margin-bottom: 2px;"
-        + "}"
-        
-        + "#input2 {"
-        + "margin-bottom: 10px;"
-        + "}"
-        
-        + "#guess {"
-        + "margin-bottom: 10px;"
-        + "margin-top: 10px;"
-        + "}"
-        
-        + "#nytspilknap {"
-        + "margin-top: 10px;"
-        + "}"
-        
-        + "</style>"
-        
-        + "<h1>Don Frankos Mobs Galgeleg</h1>");
+out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 
 
 
@@ -145,7 +115,7 @@ out.println("<style>"
 
 //Vælg singleplayer eller multiplayer eller log ud
 out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
-out.println("<p id=\"singleEllerMulti\">Vælg en funktion</p>");
+out.println("<p id=\"singleEllerMulti\">Vælg en funktion</p><br>");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
 out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Singleplayer\"></form><br>");
 
