@@ -90,19 +90,19 @@ switch (status) {
         out.println("<img src=\"http://i66.tinypic.com/2mw5r37.png\" border=\"0\" alt=\"forkert 1\">");
         break;
     case 2:
-        out.println("<img src=\"http://i67.tinypic.com/2v9c7cy.png\" border=\"0\" alt=\"forkert 2\">");
+        out.println("<img src=\"http://i68.tinypic.com/fbydtc.png\" border=\"0\" alt=\"forkert 2\">");
         break;
     case 3:
-        out.println("<img src=\"http://i68.tinypic.com/34exoqh.png\" border=\"0\" alt=\"forkert 3\">");
+        out.println("<img src=\"http://i65.tinypic.com/2dbtq9j.png\" border=\"0\" alt=\"forkert 3\">");
         break;
     case 4:
-        out.println("<img src=\"http://i67.tinypic.com/1z3uxdv.png\" border=\"0\" alt=\"forkert 4\">");
+        out.println("<img src=\"http://i68.tinypic.com/2lsihdu.png\" border=\"0\" alt=\"forkert 4\">");
         break;
     case 5:
-        out.println("<img src=\"http://i65.tinypic.com/25qxlk8.png\" border=\"0\" alt=\"forkert 5\">");
+        out.println("<img src=\"http://i68.tinypic.com/232m2x.png\" border=\"0\" alt=\"forkert 5\">");
         break;
     case 6:
-        out.println("<img src=\"http://i65.tinypic.com/optn2b.png\" border=\"0\" alt=\"forkert 6\">");
+        out.println("<img src=\"http://i65.tinypic.com/2yuneo7.png\" border=\"0\" alt=\"forkert 6\">");
         break;
 }
 
