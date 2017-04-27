@@ -125,7 +125,11 @@ out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Multipla
 
 out.println("<form method=\"POST\" action=\"galgelegWeb.jsp\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Log ud\"></form>");
+out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Log ud\"></form><br>");
+
+out.println("<form method=\"POST\" action=\"highscoreServlet\">");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Highscores\"></form>");
 
 //    singleEllerMulti = request.getParameter("singleMultiTilbage");
 //    if (singleEllerMulti.equals("Singleplayer")) {

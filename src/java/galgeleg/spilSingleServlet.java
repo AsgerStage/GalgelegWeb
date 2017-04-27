@@ -8,6 +8,11 @@ package galgeleg;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,15 +30,33 @@ public class spilSingleServlet extends HttpServlet {
     
     String name;
     String nulstil = "nej";
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
+    
+    Connector connector = new Connector();
+    
+    public int getScores() {
+        int score = 0;
+        ResultSet rs = null;
+        try {
+            rs = connector.doQuery("SELECT score FROM galgescores.highscores WHERE studentID = '"+name+"'");
+        } catch (SQLException e) {}
+        try {
+            while (rs.next()) {
+		score = rs.getInt("score");
+		}
+            } catch (SQLException e) {}
+        System.out.println("score 1: "+score);
+        return score;
+    }
+    
+    public void updateScore(int score) {
+        try {
+            System.out.println("score 2: "+score);
+            score = score + 1;
+            System.out.println("score 3: "+score);
+            connector.doUpdate("UPDATE highscores SET score ="+score+" WHERE studentID = '"+name+"'");
+        } catch (SQLException ex) {}
+    }
     
     
     
@@ -106,30 +129,6 @@ switch (status) {
         break;
 }
 
-//Hvide billeder:
-//switch (status) {
-//    case 0:
-//        out.println("<img src=\"http://i65.tinypic.com/2cnb88j.png\" border=\"0\" alt=\"Galge\">");
-//        break;
-//    case 1:
-//        out.println("<img src=\"http://i68.tinypic.com/2kem28.png\" border=\"0\" alt=\"forkert 1\">");
-//        break;
-//    case 2:
-//        out.println("<img src=\"http://i67.tinypic.com/2v9c7cy.png\" border=\"0\" alt=\"forkert 2\">");
-//        break;
-//    case 3:
-//        out.println("<img src=\"http://i68.tinypic.com/34exoqh.png\" border=\"0\" alt=\"forkert 3\">");
-//        break;
-//    case 4:
-//        out.println("<img src=\"http://i67.tinypic.com/1z3uxdv.png\" border=\"0\" alt=\"forkert 4\">");
-//        break;
-//    case 5:
-//        out.println("<img src=\"http://i65.tinypic.com/25qxlk8.png\" border=\"0\" alt=\"forkert 5\">");
-//        break;
-//    case 6:
-//        out.println("<img src=\"http://i65.tinypic.com/optn2b.png\" border=\"0\" alt=\"forkert 6\">");
-//        break;
-//}
 
 
 
@@ -156,14 +155,23 @@ out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>
 out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Afslut spil\"></form>");
 }
 else if(g.spilSlut()){
+
+    //highscore
+String b = g.logWeb(name);
+int indexstringb = b.indexOf("SPILLET ER ");
+b = b.substring(indexstringb+11, indexstringb+12);
+if (b.startsWith("V"))
+    updateScore(getScores());
+
+
     out.println("<p>"+g.logWeb(name)+"</p>");
     out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
     out.println("<input type=\"text\" name=\"nulstil\" value=\"nulstilMigIkke\" readonly hidden/>");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
+    out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form><br>");
     out.println("<form method=\"POST\" action=\"MinServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Hovedmenu\"></form>");
     g.nulstil(name);
 }
 

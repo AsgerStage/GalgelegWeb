@@ -24,6 +24,16 @@ p {
     font-size: 20px;
     
 }
+
+p2 {
+    color:#20C20E;
+    margin-bottom: 2px;
+    font-family: Monospace, Arial;
+    font-weight: bold;
+    font-size: 30px;
+    
+}
+
 #input2 {
     margin-bottom: 10px
 }
@@ -45,3 +55,24 @@ input:hover {
     background: #3cfc3c;
     text-decoration: none;
 }
+
+table {
+    color: #20C20E;
+    font-family: Monospace, Arial;
+    font-size: 20px;
+}
+
+/*td {
+    color: #ffffff;
+}
+
+th {
+    color: #ffffff;
+}
+tr {
+    color: #ffffff;
+}
+
+sql {
+    color: #ffffff;
+}*/
