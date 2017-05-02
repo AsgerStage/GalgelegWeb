@@ -5,13 +5,11 @@
  */
 package galgeleg;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Magnus
  */
-public class scoreDTO implements Serializable {
+public class scoreDTO  {
     String userID;
     int score;
     

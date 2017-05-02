@@ -24,8 +24,8 @@ public class Connector {
     private final String HOST     = "ubuntu4.javabog.dk";
     private final int    PORT     = 3306;
     private final String DATABASE = "galgescores";
-    private final String USERNAME = "root"; 
-    private final String PASSWORD = "root";
+    private final String USERNAME = "donfranko"; 
+    private final String PASSWORD = "dist";
     private static Connection connection;
     
     public Connector() {

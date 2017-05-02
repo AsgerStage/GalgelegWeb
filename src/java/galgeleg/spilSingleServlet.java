@@ -34,29 +34,29 @@ public class spilSingleServlet extends HttpServlet {
 
     Connector connector = new Connector();
     
-    public int getScores() {
-        int score = 0;
-        ResultSet rs = null;
-        try {
-            connector.doUpdate("INSERT INTO highscores (studentID, score) VALUES ('"+name+"', 0);");
-            rs = connector.doQuery("SELECT score FROM galgescores.highscores WHERE studentID = '"+name+"'");
-        } catch (SQLException e) {}
-        try {
-            while (rs.next()) {
-		score = rs.getInt("score");
-		}
-            } catch (SQLException e) {}
-        System.out.println("score 1: "+score);
-        return score;
-    }
+//    public int getScores() {
+//        int score = 0;
+//        ResultSet rs = null;
+//        try {
+////            connector.doUpdate("INSERT INTO highscores (studentID, score) VALUES ('"+name+"', 0);");
+//            rs = connector.doQuery("SELECT score FROM galgescores.highscores WHERE studentID = '"+name+"'");
+//        } catch (SQLException e) {}
+//        try {
+//            while (rs.next()) {
+//		score = rs.getInt("score");
+//		}
+//            } catch (SQLException e) {}
+//        System.out.println("score 1: "+score);
+//        return score;
+//    }
     
-    public void updateScore(int score) {
+    public void updateScore() {
         try {
-            System.out.println("score 2: "+score);
-            score = score + 1;
-            System.out.println("score 3: "+score);
-            connector.doUpdate("INSERT INTO highscores (studentID, score) VALUES ('"+name+"', 0);");
-            connector.doUpdate("UPDATE highscores SET score ="+score+" WHERE studentID = '"+name+"'");
+//            System.out.println("score 2: "+score);
+//            score = score + 1;
+//            System.out.println("score 3: "+score);
+            connector.doUpdate("INSERT INTO highscores (studentID, score) VALUES ('"+name+"', 1) ON DUPLICATE KEY UPDATE score=score+1;");
+//            connector.doUpdate("UPDATE highscores SET score ="+score+" WHERE studentID = '"+name+"'");
         } catch (SQLException ex) {}
     }
     
@@ -165,7 +165,7 @@ String b = g.logWeb(name);
 int indexstringb = b.indexOf("SPILLET ER ");
 b = b.substring(indexstringb+11, indexstringb+12);
 if (b.startsWith("V"))
-    updateScore(getScores());
+    updateScore();
 
 
     out.println("<p>"+g.logWeb(name)+"</p>");
@@ -178,36 +178,6 @@ if (b.startsWith("V"))
     out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Hovedmenu\"></form>");
     g.nulstil(name);
 }
-
-
-//
-
-//if (g.isContinueAvailable(name) == true) {
-
-//} else {
-//    if(!g.spilSlut()){
-//        //Herfra kører spillet
-//        out.println("<p>"+g.logWeb(name)+"</p>");
-//        out.println("<form method=\"POST\" action=\"spilSingleplayerServlet\">");
-//        out.println("<p>Dit gæt: </p>");
-//        out.println("<input type=\"String\" id=\"guess1\"  name=\"guess\" autofocus>   ");
-//        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"><br></form>");
-//    }
-//    else if(g.spilSlut()){
-//        out.println("<p>"+g.logWeb(name)+"</p>");
-//        out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
-//        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
-//        g.nulstil(name);
-//    }
-//}
-
-// når man forsøger at gætte sker følgende:
-//
-// type Status report
-//
-// messageNot Found
-//
-// descriptionThe requested resource is not available.
 
 
 
