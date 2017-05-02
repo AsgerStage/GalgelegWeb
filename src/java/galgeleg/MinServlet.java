@@ -119,7 +119,7 @@ out.println("<p id=\"singleEllerMulti\">Vælg en funktion</p><br>");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
 out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Singleplayer\"></form><br>");
 
-out.println("<form method=\"POST\" action=\"MinServlet\">");
+out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
 out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Multiplayer\"></form><br>");
 

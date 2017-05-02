@@ -7,6 +7,7 @@ package galgeleg;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,9 +32,10 @@ import java.util.List;
 public class highscoreServlet extends HttpServlet {
     
     String name;
-    Connector connector = new Connector();
+    
     
     public ArrayList<scoreDTO> getScores() {
+        Connector connector = new Connector();
         ArrayList<scoreDTO> list = new ArrayList<scoreDTO>();
         ResultSet rs = null;
         try {
@@ -88,8 +90,7 @@ out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 out.println("<p2>Highscores</p2><br>");
 
 
-ArrayList<scoreDTO> list = getScores();
-
+ArrayList<scoreDTO> list = getScores();   
 
 
 out.println("<div align=\"center\">");

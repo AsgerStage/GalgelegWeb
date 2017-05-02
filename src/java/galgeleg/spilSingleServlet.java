@@ -31,13 +31,14 @@ public class spilSingleServlet extends HttpServlet {
     String name;
     String nulstil = "nej";
 
-    
+
     Connector connector = new Connector();
     
     public int getScores() {
         int score = 0;
         ResultSet rs = null;
         try {
+            connector.doUpdate("INSERT INTO highscores (studentID, score) VALUES ('"+name+"', 0);");
             rs = connector.doQuery("SELECT score FROM galgescores.highscores WHERE studentID = '"+name+"'");
         } catch (SQLException e) {}
         try {
@@ -54,6 +55,7 @@ public class spilSingleServlet extends HttpServlet {
             System.out.println("score 2: "+score);
             score = score + 1;
             System.out.println("score 3: "+score);
+            connector.doUpdate("INSERT INTO highscores (studentID, score) VALUES ('"+name+"', 0);");
             connector.doUpdate("UPDATE highscores SET score ="+score+" WHERE studentID = '"+name+"'");
         } catch (SQLException ex) {}
     }
@@ -155,6 +157,8 @@ out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>
 out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Afslut spil\"></form>");
 }
 else if(g.spilSlut()){
+    
+
 
     //highscore
 String b = g.logWeb(name);

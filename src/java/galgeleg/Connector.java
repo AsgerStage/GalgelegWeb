@@ -16,11 +16,16 @@ import java.sql.Statement;
  * @author Magnus
  */
 public class Connector {
-    private final String HOST     = "127.0.0.1";
+//    private final String HOST     = "127.0.0.1";
+//    private final int    PORT     = 3306;
+//    private final String DATABASE = "galgescores";
+//    private final String USERNAME = "root"; 
+//    private final String PASSWORD = "";
+    private final String HOST     = "ubuntu4.javabog.dk";
     private final int    PORT     = 3306;
     private final String DATABASE = "galgescores";
     private final String USERNAME = "root"; 
-    private final String PASSWORD = "";
+    private final String PASSWORD = "root";
     private static Connection connection;
     
     public Connector() {
