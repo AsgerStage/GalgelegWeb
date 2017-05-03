@@ -66,7 +66,7 @@ public class highscoreServlet extends HttpServlet {
 //            /* TODO output your page here. You may use following sample code. */
 
 
-URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
+URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
 QName qname = new QName("http://galgeleg/", "GalgelegImplService");
 QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
 Service service = Service.create(url, qname);

@@ -47,15 +47,11 @@ public class MinServlet extends HttpServlet {
 //            /* TODO output your page here. You may use following sample code. */
 
 
-URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
+URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
 QName qname = new QName("http://galgeleg/", "GalgelegImplService");
 QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
 Service service = Service.create(url, qname);
 GalgelegI g = service.getPort(qnameport,GalgelegI.class);
-
-
-//String guess = request.getParameter("guess");
-//g.gætBogstav(""+guess, name);
 
 
 
@@ -69,49 +65,6 @@ out.println("<body>");
 out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 
 
-
-
-//String a = g.log(name);
-//int indexstring = a.indexOf("Antal forkerte bogstaver");
-//a = a.substring(indexstring+27, indexstring+28);
-//int status = 7;
-//try {
-//    status = Integer.parseInt(a);
-//} catch (NumberFormatException e) {
-//    status = 7;
-//}
-//
-//
-//switch (status) {
-//    case 0:
-//        out.println("<img src=\"http://i65.tinypic.com/2cnb88j.png\" border=\"0\" alt=\"Galge\">");
-//        break;
-//    case 1:
-//        out.println("<img src=\"http://i68.tinypic.com/2kem28.png\" border=\"0\" alt=\"forkert 1\">");
-//        break;
-//    case 2:
-//        out.println("<img src=\"http://i67.tinypic.com/2v9c7cy.png\" border=\"0\" alt=\"forkert 2\">");
-//        break;
-//    case 3:
-//        out.println("<img src=\"http://i68.tinypic.com/34exoqh.png\" border=\"0\" alt=\"forkert 3\">");
-//        break;
-//    case 4:
-//        out.println("<img src=\"http://i67.tinypic.com/1z3uxdv.png\" border=\"0\" alt=\"forkert 4\">");
-//        break;
-//    case 5:
-//        out.println("<img src=\"http://i65.tinypic.com/25qxlk8.png\" border=\"0\" alt=\"forkert 5\">");
-//        break;
-//    case 6:
-//        out.println("<img src=\"http://i65.tinypic.com/optn2b.png\" border=\"0\" alt=\"forkert 6\">");
-//        break;
-//        }
-
-
-
-
-//String singleEllerMulti = "0";
-//
-//if (singleEllerMulti.equals("0")) {
 
 //Vælg singleplayer eller multiplayer eller log ud
 out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
@@ -130,90 +83,6 @@ out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Log ud\"
 out.println("<form method=\"POST\" action=\"highscoreServlet\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
 out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Highscores\"></form>");
-
-//    singleEllerMulti = request.getParameter("singleMultiTilbage");
-//    if (singleEllerMulti.equals("Singleplayer")) {
-//        out.print("<p> Du har valgt singleplayer </p>");
-//    } else if (singleEllerMulti.equals("Multiplayer")) {
-//        out.print("<p> Du har valgt multiplayer </p>");
-//    } else {
-//        //Her skal den gå tilbage til galgelegWeb.jsp. Det finder vi ud af senereeeeeeee.
-//    }
-//}
-
-//if (singleEllerMulti.equals("Singleplayer")) {
-//    String fortsæt = "0";
-//    if (g.isContinueAvailable(name) == true){
-//        out.println("<form method=\"POST\" action=\"MinServlet\">");
-//        out.println("<p id=\"single\">Du har allerede et igangværende spil, ønsker du at spille videre eller starte et nyt?</p>");
-//        out.print("<input type=\"submit\" name=\"fortsæt\" value=\"Fortsæt gammelt spil\">");
-//        out.print("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\">");
-//        out.print("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
-//    }
-//    else {
-//        out.println("<form method=\"POST\" action=\"MinServlet\">");
-//        out.println("<p id=\"single2\">Du har ikke et igangværende spil, ønsker du at starte et?</p>");
-//        out.print("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
-//        out.print("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
-//    }
-//
-//    fortsæt = request.getParameter("fortsæt");
-//    if (fortsæt.equals("Fortsæt gammelt spil")) {
-//        out.print("<p> Du har valgt at fortsætte dit gamle spil </p>");
-//    } else if (fortsæt.equals("Start nyt spil")) {
-//        out.print("<p> Du har valgt at starte et nyt spil </p>");
-//    } else {
-//        //Her skal den gå tilbage til galgelegWeb.jsp. Det finder vi ud af senereeeeeeee.
-//    }
-//}
-
-
-
-
-//    if(!g.spilSlut()){
-//        //Herfra kører spillet
-//        out.println("<p>"+g.logWeb(name)+"</p>");
-//        out.println("<form method=\"POST\" action=\"MinServlet\">");
-//        out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   <br>");
-//        out.println("<p id=\"yourguess\"> dit gæt</p>");
-//        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"></form>");
-//    }
-
-
-
-//    If Request.Form("submitButton") = "Previous Page" Then
-//    ' Code for Previous Page
-//ElseIf Request.Form("submitButton") = "Next Page" Then
-//    ' Code for Next Page
-//End If
-
-//    if (Request.Form("submitButton") == "Previos") {
-//    //update action
-//    } else if (isset($_POST['multiplayerKnap'])) {
-//    //delete action
-//    } else {
-//    //no button pressed
-//    }
-
-
-
-
-
-//    if(!g.spilSlut()){
-//        //Herfra kører spillet
-//        out.println("<p>"+g.logWeb(name)+"</p>");
-//        out.println("<form method=\"POST\" action=\"MinServlet\">");
-//        out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   <br>");
-//        out.println("<p id=\"yourguess\"> dit gæt</p>");
-//        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"></form>");
-//    }
-//    else if(g.spilSlut()){
-//        out.println("<p>"+g.logWeb(name)+"</p>");
-//        out.println("<form method=\"POST\" action=\"MinServlet\">");
-//        out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Start nyt spil\" id=\"nytspilknap\"></form>");
-//        g.nulstil(name);
-//    }
-//}
 
 
 

@@ -44,17 +44,12 @@ public class singleplayerServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             
-            URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
+            URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
             QName qname = new QName("http://galgeleg/", "GalgelegImplService");
             QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
             Service service = Service.create(url, qname);
             GalgelegI g = service.getPort(qnameport,GalgelegI.class);
             
-            
-//String guess = request.getParameter("guess");
-//g.gætBogstav(""+guess, name);
-
-
 
 
 out.println("<!DOCTYPE html>");
@@ -66,13 +61,6 @@ out.println("</head>");
 out.println("<body>");
 out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 
-
-//            out.println("<h1>Hej " + name + "</h1>");
-
-
-
-//    String fortsæt = "0";
-//    if (g.isContinueAvailable(name) == true){
 
 
 if(g.isContinueAvailable(name) != false) {
@@ -102,47 +90,6 @@ if(g.isContinueAvailable(name) != false) {
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
     out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
 }
-
-//    else if (g.isContinueAvailable(name) == false) {
-//        out.println("<form method=\"POST\" action=\"MinServlet\">");
-//        out.println("<p id=\"single2\">Du har ikke et igangværende spil, ønsker du at starte et?</p>");
-//        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start nyt spil\"></form>");
-//
-//        out.println("<form method=\"POST\" action=\"MinServlet\">");
-//        out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form>");
-//    }
-
-
-
-
-//        out.println("<form method=\"POST\" action=\"singleplayerServlet\">");
-//    out.println("<p id=\"singleEllerMulti\">Vælg en funktion</p>");
-//    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-//    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Singleplayer\"></form><br>");
-//
-//    out.println("<form method=\"POST\" action=\"MinServlet\">");
-//    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-//    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Multiplayer\"></form><br>");
-//
-//    out.println("<form method=\"POST\" action=\"galgelegWeb.jsp\">");
-//    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-//    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Log ud\"></form>");
-
-
-
-
-//    fortsæt = request.getParameter("fortsæt");
-//    if (fortsæt.equals("Fortsæt gammelt spil")) {
-//        out.print("<p> Du har valgt at fortsætte dit gamle spil </p>");
-//    } else if (fortsæt.equals("Start nyt spil")) {
-//        out.print("<p> Du har valgt at starte et nyt spil </p>");
-//    } else {
-//        //Her skal den gå tilbage til galgelegWeb.jsp. Det finder vi ud af senereeeeeeee.
-//    }
-//
-//
-
-
 
 
 

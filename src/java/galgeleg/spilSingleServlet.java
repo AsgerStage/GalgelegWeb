@@ -70,7 +70,7 @@ public class spilSingleServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
             
-            URL url = new URL("http://ubuntu4.javabog.dk:3033/galgelegtjeneste?wsdl");
+            URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
             QName qname = new QName("http://galgeleg/", "GalgelegImplService");
             QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
             Service service = Service.create(url, qname);
@@ -92,9 +92,6 @@ public class spilSingleServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
             
-            
-//            out.println("<h1>Hej " + name + "</h1>");
-
 
 String a = g.log(name);
 int indexstring = a.indexOf("Antal forkerte bogstaver");
@@ -139,11 +136,6 @@ g.playerCheck(name);
 
 
 if(!g.spilSlut()){
-    //Herfra kører spillet
-//        out.println("<p>"+"VI TESTER"+g.synligtOrd(name)+"</p>");
-
-//        out.println("<p>"+"VI TESTER"+g.log(name)+"</p>");
-
 out.println("<p>"+g.logWeb(name)+"</p>");
 out.println("<form method=\"POST\" action=\"spilSingleServlet\">");
 out.println("<p>Dit gæt: </p>");
