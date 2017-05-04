@@ -21,12 +21,12 @@ import javax.xml.ws.Service;
  *
  * @author magnu
  */
-@WebServlet(name = "joinLobbyServlet", urlPatterns = {"/joinLobbyServlet"})
-public class joinLobbyServlet extends HttpServlet {
+@WebServlet(name = "createLobbyServlet", urlPatterns = {"/createLobbyServlet"})
+public class createLobbyServlet extends HttpServlet {
     
     String name;
-    String lobbyNavn;
     String stringid;
+    public static GalgelegI g;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -51,7 +51,7 @@ public class joinLobbyServlet extends HttpServlet {
             QName qname = new QName("http://galgeleg/", "GalgelegImplService");
             QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
             Service service = Service.create(url, qname);
-            GalgelegI g = service.getPort(qnameport,GalgelegI.class);
+            g = service.getPort(qnameport,GalgelegI.class);
             
             
             
@@ -68,55 +68,39 @@ public class joinLobbyServlet extends HttpServlet {
             
             
 //AUTOREFRESHER hvert 5 sekundt.... midlertidig fix ?
-out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
-
-
-out.println("<p>Du ("+name+") deltager i en lobby oprettet af: "+lobbyNavn+"</p><br>");
+//out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
 
 
 
+out.println("<p>Du ("+name+") har oprettet en lobby</p><br>");
+
+//Opretter lobbyen
+if (!g.isMyMultiOver(name).contains("slut"))
+    g.leaveLobby(name);
+
+ g.newMulti(name);
+
+//ArrayList<String> navne = g.joinMulti(g.getMultiListNames().get(Integer.parseInt(stringid)-1), name);
+//out.println("<p>Deltagere: </p><br>");
+//for (int j = 0; j < navne.size(); j++) {
+//    out.println("<p>"+navne.get(j)+"</p><br>");
+//}
 
 
+//g.startGame(name);
 
-if (g.isGameStarted(name) == false)    {
-System.out.println("------");
-System.out.println("Du har nu joinet " + g.getMultiListNames().get(Integer.parseInt(stringid)-1));
-ArrayList<String> navne = g.joinMulti(g.getMultiListNames().get(Integer.parseInt(stringid)-1), name);
-//skal slettes
-out.println("<p>Deltagere: </p><br>");
-for (int j = 0; j < navne.size(); j++) {
-    out.println("<p>"+navne.get(j)+"</p><br>");
-}
-
-}
-
-if (g.isGameStarted(name) == true)    {
-    out.println("<p>SPILLET ER STARTET DIN BØV - KOM IGANG!</p><br>");
-    out.println("<form method=\"POST\" action=\"spilMultiServlet\">");
-    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tryk her for at spille med!\"></form><br>");
-}
-
-
-
-
-
-
+//Start spil
+out.println("<form method=\"POST\" action=\"waitingToStartLobbyServlet\">");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Gå til lobby\"></form><br>");
 
 
 
 //gå tilbage
 out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-out.println("<input type=\"text\" name=\"leaveLobby\" value=\"leaveLobby\" readonly hidden/>");
-out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
-
-
-
-
-
-
-
+out.println("<input type=\"text\" name=\"leaveLobby\" value=\"clearLobby\" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Slet lobby\"></form><br>");
 
 
 
@@ -157,9 +141,10 @@ out.println("</html>");
             throws ServletException, IOException {
         
         name = request.getParameter("name");
-        lobbyNavn = request.getParameter("lobbyNavn");
         stringid = request.getParameter("lobbyID");
+        
         processRequest(request, response);
+       
     }
     
     

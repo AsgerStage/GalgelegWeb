@@ -25,8 +25,8 @@ import javax.xml.ws.Service;
  *
  * @author magnu
  */
-@WebServlet(name = "spilMultiServlet", urlPatterns = {"/spilMultiServlet"})
-public class spilMultiServlet extends HttpServlet {
+@WebServlet(name = "spilMitMultiServlet", urlPatterns = {"/spilMitMultiServlet"})
+public class spilMitMultiServlet extends HttpServlet {
     
     String name;
     String nulstil = "nej";
@@ -49,13 +49,15 @@ public class spilMultiServlet extends HttpServlet {
             Service service = Service.create(url, qname);
             g = service.getPort(qnameport,GalgelegI.class);
             
+            if (!g.isGameStarted(name))
+                g.startGame(name);
+
+
             
             String guess = request.getParameter("guess");
             
             g.gætBogstavMultiOgLog(""+guess, name);
             
-
-
 
 
 

@@ -64,13 +64,17 @@ out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 
 if (leaveLobby.equals("leaveLobby")){
     g.leaveLobby(name);
-        out.println("<p>Du har forladt lobbyen</p>");
+    out.println("<p>Du har forladt lobbyen</p>");
+} else if (leaveLobby.equals("clearLobby")) {
+    g.clearLobby(name);
+    out.println("<p>Du har stoppet lobbyen</p>");
 }
-    
+
+
+    out.println("<p id=\"single\">Vil du starte eller deltage i et spil?</p><br>");
 
     //Start spil
-    out.println("<form method=\"POST\" action=\"MinServlet\">"); //IKKE LAVET ENDNU!!!!!!!!!!!!!!!!!!!!!!
-    out.println("<p id=\"single\">Vil du starte eller deltage i et spil?</p><br>");
+    out.println("<form method=\"POST\" action=\"createLobbyServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
     out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Opret lobby\"></form><br>");
     //join spil
@@ -78,10 +82,10 @@ if (leaveLobby.equals("leaveLobby")){
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
     out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Deltag i lobby\"></form><br>");
     
-//se highscore
-out.println("<form method=\"POST\" action=\"highscoreServlet\">");
-out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Highscores\"></form><br>");
+    //se highscore
+    out.println("<form method=\"POST\" action=\"highscoreServlet\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Highscores\"></form><br>");
 
 
     //gå tilbage

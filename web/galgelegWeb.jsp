@@ -137,7 +137,6 @@ function myFunction() {
     document.getElementById("yourguess").innerHTML = document.getElementById("guess").value;
 }
 </script>-->
-
 <form method="POST" action="MinServlet">
          
     <!--<input type="String" id="guess"  name="guess">   <br><br><br>-->

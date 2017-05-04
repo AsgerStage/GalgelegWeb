@@ -64,6 +64,10 @@ out.println("</head>");
 out.println("<body>");
 out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 
+//AUTOREFRESHER hvert 5 sekundt.... midlertidig fix ?
+//out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
+//out.println("<meta http-equiv=\"refresh\" content=\"5;URL=./singleplayerServlet\">");
+
 
 
 //Vælg singleplayer eller multiplayer eller log ud
