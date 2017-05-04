@@ -32,7 +32,7 @@ public class spilSingleServlet extends HttpServlet {
     String nulstil = "nej";
 
 
-    Connector connector = new Connector();
+//    Connector connector = new Connector();
     
 //    public int getScores() {
 //        int score = 0;
@@ -50,15 +50,15 @@ public class spilSingleServlet extends HttpServlet {
 //        return score;
 //    }
     
-    public void updateScore() {
-        try {
-//            System.out.println("score 2: "+score);
-//            score = score + 1;
-//            System.out.println("score 3: "+score);
-            connector.doUpdate("INSERT INTO highscores (studentID, score) VALUES ('"+name+"', 1) ON DUPLICATE KEY UPDATE score=score+1;");
-//            connector.doUpdate("UPDATE highscores SET score ="+score+" WHERE studentID = '"+name+"'");
-        } catch (SQLException ex) {}
-    }
+//    public void updateScore() {
+//        try {
+////            System.out.println("score 2: "+score);
+////            score = score + 1;
+////            System.out.println("score 3: "+score);
+//            connector.doUpdate("INSERT INTO highscores (studentID, score) VALUES ('"+name+"', 1) ON DUPLICATE KEY UPDATE score=score+1;");
+////            connector.doUpdate("UPDATE highscores SET score ="+score+" WHERE studentID = '"+name+"'");
+//        } catch (SQLException ex) {}
+//    }
     
     
     
@@ -153,11 +153,11 @@ else if(g.spilSlut()){
 
 
     //highscore
-String b = g.logWeb(name);
-int indexstringb = b.indexOf("SPILLET ER ");
-b = b.substring(indexstringb+11, indexstringb+12);
-if (b.startsWith("V"))
-    updateScore();
+//String b = g.logWeb(name);
+//int indexstringb = b.indexOf("SPILLET ER ");
+//b = b.substring(indexstringb+11, indexstringb+12);
+//if (b.startsWith("V"))
+//    updateScore();
 
 
     out.println("<p>"+g.logWeb(name)+"</p>");

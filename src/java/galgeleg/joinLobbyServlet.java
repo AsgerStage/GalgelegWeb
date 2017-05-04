@@ -8,11 +8,15 @@ package galgeleg;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
@@ -25,6 +29,7 @@ public class joinLobbyServlet extends HttpServlet {
     
     String name;
     String lobbyNavn;
+    String stringid;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,46 +55,67 @@ public class joinLobbyServlet extends HttpServlet {
             QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
             Service service = Service.create(url, qname);
             GalgelegI g = service.getPort(qnameport,GalgelegI.class);
+            
+            
+            
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">");
+            out.println("<title>Galgeleg</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
+            
+            
+            
+//AUTOREFRESHER hvert 5 sekundt.... midlertidig fix ?
+out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
 
 
-
-
-out.println("<!DOCTYPE html>");
-out.println("<html>");
-out.println("<head>");
-out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">");
-out.println("<title>Galgeleg</title>");
-out.println("</head>");
-out.println("<body>");
-out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
-
-
-
-
-//    for (int i = 1; i < g.getMultiListNames().size()+1; i++)
-//        out.println("<p>"+i + ". " + g.getMultiListNames().get(i-1)+"</p>");
+//id = stringid;
 
 out.println("<p>Du ("+name+") deltager i en lobby oprettet af: "+lobbyNavn+"</p><br>");
-out.println("<p>Venter på hosten starter spillet</p><br>");
 
-//
-//    //Opret knapper til at joine spil
-//    for (int i = 1; i < g.getMultiListNames().size()+1; i++) {
-//        
-//        String lobbyNavn = g.getMultiListNames().get(i-1);
-//        lobbyNavn = lobbyNavn.substring(0,7);
-//        out.println("<form method=\"POST\" action=\"lobbyServlet\">");
-//        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-//        out.println("<input type=\"text\" name=\"name\" value="+lobbyNavn+" readonly hidden/>");
-//        out.println("<input type=\"submit\" name=\"fortsæt\" value=\""+lobbyNavn+"'s lobby\"></form><br>");
-//    }
-//    
-    
-    //gå tilbage
-    out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
+
+
+
+
+
+if (g.isGameStarted(name) == false)    {
+System.out.println("------");
+System.out.println("Du har nu joinet " + g.getMultiListNames().get(Integer.parseInt(stringid)-1));
+ArrayList<String> navne = g.joinMulti(g.getMultiListNames().get(Integer.parseInt(stringid)-1), name);
+//skal slettes
+out.println("<p>Deltagere: </p><br>");
+for (int j = 0; j < navne.size(); j++) {
+    out.println("<p>"+navne.get(j)+"</p><br>");
+}
+
+}
+
+if (g.isGameStarted(name) == true)    {
+    out.println("<p>SPILLET ER STARTET DIN BØV - KOM IGANG!</p><br>");
+    out.println("<form method=\"POST\" action=\"spilMultiServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
-    
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tryk her for at spille med!\"></form><br>");
+}
+
+
+
+
+
+
+
+
+
+//gå tilbage
+out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"text\" name=\"leaveLobby\" value=\"leaveLobby\" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
+
 
 
 
@@ -116,6 +142,10 @@ out.println("</html>");
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        
+        
         processRequest(request, response);
     }
     
@@ -133,8 +163,11 @@ out.println("</html>");
         
         name = request.getParameter("name");
         lobbyNavn = request.getParameter("lobbyNavn");
+        stringid = request.getParameter("lobbyID");
         processRequest(request, response);
     }
+    
+    
     
     /**
      * Returns a short description of the servlet.

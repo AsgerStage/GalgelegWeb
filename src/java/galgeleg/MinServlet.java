@@ -74,15 +74,16 @@ out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Singlepl
 
 out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"text\" name=\"leaveLobby\" value=\"dontLeaveLobby\" readonly hidden/>");
 out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Multiplayer\"></form><br>");
 
 out.println("<form method=\"POST\" action=\"galgelegWeb.jsp\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
 out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Log ud\"></form><br>");
 
-out.println("<form method=\"POST\" action=\"highscoreServlet\">");
-out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Highscores\"></form>");
+//out.println("<form method=\"POST\" action=\"highscoreServlet\">");
+//out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+//out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Highscores\"></form>");
 
 
 

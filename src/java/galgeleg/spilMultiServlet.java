@@ -8,6 +8,11 @@ package galgeleg;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,20 +25,12 @@ import javax.xml.ws.Service;
  *
  * @author magnu
  */
-@WebServlet(name = "multiplayerServlet", urlPatterns = {"/multiplayerServlet"})
-public class multiplayerServlet extends HttpServlet {
+@WebServlet(name = "spilMultiServlet", urlPatterns = {"/spilMultiServlet"})
+public class spilMultiServlet extends HttpServlet {
     
     String name;
-    String leaveLobby = "";
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    String nulstil = "nej";
+    
     
     
     
@@ -50,9 +47,16 @@ public class multiplayerServlet extends HttpServlet {
             QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
             Service service = Service.create(url, qname);
             GalgelegI g = service.getPort(qnameport,GalgelegI.class);
+            
+            
+            String guess = request.getParameter("guess");
+//            g.gætBogstav(""+guess, name);
+g.gætBogstavMultiOgLog(""+guess, name);
 
-            
-            
+
+
+
+
 out.println("<!DOCTYPE html>");
 out.println("<html>");
 out.println("<head>");
@@ -62,37 +66,84 @@ out.println("</head>");
 out.println("<body>");
 out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 
-if (leaveLobby.equals("leaveLobby")){
-    g.leaveLobby(name);
-        out.println("<p>Du har forladt lobbyen</p>");
-}
+
+//AUTOREFRESHER hvert 5 sekundt.... midlertidig fix ?
+out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
+
+
+
+
+if (g.isMyMultiOver(name).contains("slut")){
+    //Hvis spillet er slut: lav en tilbageknap, announce hvem der vandt....
+    out.println("<p>"+g.isMyMultiOver(name)+"</p><br>");
     
-
-    //Start spil
-    out.println("<form method=\"POST\" action=\"MinServlet\">"); //IKKE LAVET ENDNU!!!!!!!!!!!!!!!!!!!!!!
-    out.println("<p id=\"single\">Vil du starte eller deltage i et spil?</p><br>");
+    out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Opret lobby\"></form><br>");
-    //join spil
-    out.println("<form method=\"POST\" action=\"lobbyServlet\">");
-    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Deltag i lobby\"></form><br>");
-    
-//se highscore
-out.println("<form method=\"POST\" action=\"highscoreServlet\">");
-out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Highscores\"></form><br>");
-
-
-    //gå tilbage
-    out.println("<form method=\"POST\" action=\"MinServlet\">");
-    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"leaveLobby\" value=\"dontLeaveLobby\" readonly hidden/>");
     out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
     
+}
+
+if (!g.isMyMultiOver(name).contains("slut") && !g.isMyMultiActive(name)){
+    out.println("<p>Venter på de andre spillere</p>");
+}
+
+if (g.isMyMultiActive(name)){
+    String a = g.multiLog(name);
+    int indexstring = a.indexOf("Antal forkerte bogstaver");
+    a = a.substring(indexstring+27, indexstring+28);
+    int status = 7;
+    try {
+        status = Integer.parseInt(a);
+    } catch (NumberFormatException e) {
+        status = 7;
+    }
+    
+    
+    switch (status) {
+        case 0:
+            out.println("<img src=\"http://i66.tinypic.com/351ts0z.png\" border=\"0\" alt=\"Galge\">");
+            break;
+        case 1:
+            out.println("<img src=\"http://i66.tinypic.com/2mw5r37.png\" border=\"0\" alt=\"forkert 1\">");
+            break;
+        case 2:
+            out.println("<img src=\"http://i68.tinypic.com/fbydtc.png\" border=\"0\" alt=\"forkert 2\">");
+            break;
+        case 3:
+            out.println("<img src=\"http://i65.tinypic.com/2dbtq9j.png\" border=\"0\" alt=\"forkert 3\">");
+            break;
+        case 4:
+            out.println("<img src=\"http://i68.tinypic.com/2lsihdu.png\" border=\"0\" alt=\"forkert 4\">");
+            break;
+        case 5:
+            out.println("<img src=\"http://i68.tinypic.com/232m2x.png\" border=\"0\" alt=\"forkert 5\">");
+            break;
+        case 6:
+            out.println("<img src=\"http://i65.tinypic.com/2yuneo7.png\" border=\"0\" alt=\"forkert 6\">");
+            break;
+    }
+    
+    
+    
+    
+//g.playerCheck(name);
+
+out.println("<p>"+g.multiLog(name)+"</p>");
+out.println("<form method=\"POST\" action=\"spilMultiServlet\">");
+out.println("<p>Dit gæt: </p>");
+out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   ");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"guessKnap\" value=\"Gæt\"></form><br>");
+
+out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
+out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+out.println("<input type=\"text\" name=\"leaveLobby\" value=\"leaveLobby\" readonly hidden/>");
+out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
 
 
 
-
+}
 
 
 
@@ -131,8 +182,7 @@ out.println("</html>");
             throws ServletException, IOException {
         
         name = request.getParameter("name");
-        leaveLobby = request.getParameter("leaveLobby");
-        
+        nulstil = request.getParameter("nulstil");
         processRequest(request, response);
     }
     

@@ -13,6 +13,10 @@ public class scoreDTO  {
     String userID;
     int score;
     
+    public scoreDTO(){
+    	
+    }
+    
     public scoreDTO(String userID, int score) {
         this.userID = userID;
         this.score = score;

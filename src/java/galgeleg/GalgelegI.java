@@ -5,6 +5,7 @@
 */
 package galgeleg;
 
+import brugerautorisation.data.Bruger;
 import java.util.ArrayList;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -44,6 +45,12 @@ public interface GalgelegI // extends java.rmi.Remote
     @WebMethod public String gætBogstavMultiOgLog(String ord, String brugernavn);
     @WebMethod public Boolean isContinueAvailable(String bruger);
     @WebMethod public void leaveLobby(String brugerID);
+    @WebMethod public String multiLog(String brugerID);
+    @WebMethod public String clearLobby(String brugerID);
+    @WebMethod public boolean isMyMultiActive(String brugerID);
+    @WebMethod public String isMyMultiOver(String brugerID);
+    @WebMethod public Bruger login(String brugerID, String password);
+    @WebMethod public ArrayList<scoreDTO> getScores();
     
     
 }

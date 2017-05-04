@@ -31,29 +31,8 @@ import java.util.List;
 @WebServlet(name = "highscoreServlet", urlPatterns = {"/highscoreServlet"})
 public class highscoreServlet extends HttpServlet {
     
+    public static GalgelegI g;
     String name;
-    
-    
-    public ArrayList<scoreDTO> getScores() {
-        Connector connector = new Connector();
-        ArrayList<scoreDTO> list = new ArrayList<scoreDTO>();
-        ResultSet rs = null;
-        try {
-            rs = connector.doQuery("SELECT * FROM galgescores.highscores ORDER BY score DESC LIMIT 10");
-        } catch (SQLException e) {
-            
-        }
-        try {
-            while (rs.next()) {
-		list.add(new scoreDTO(rs.getString("studentID"), rs.getInt("score")));
-		}
-            } catch (SQLException e) {
-                
-            }
-        
-        return list;
-    }
-    
     
 
     
@@ -70,12 +49,7 @@ URL url = new URL("http://ubuntu4.javabog.dk:3043/galgelegtjeneste?wsdl");
 QName qname = new QName("http://galgeleg/", "GalgelegImplService");
 QName qnameport = new QName("http://galgeleg/", "GalgelegImplPort");
 Service service = Service.create(url, qname);
-GalgelegI g = service.getPort(qnameport,GalgelegI.class);
-
-
-//String guess = request.getParameter("guess");
-//g.gætBogstav(""+guess, name);
-
+g = service.getPort(qnameport,GalgelegI.class);
 
 
 out.println("<!DOCTYPE html>");
@@ -90,7 +64,7 @@ out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 out.println("<p2>Highscores</p2><br>");
 
 
-ArrayList<scoreDTO> list = getScores();   
+ArrayList<scoreDTO> list = g.getScores();
 
 
 out.println("<div align=\"center\">");
@@ -154,8 +128,10 @@ out.println("</div><br>");
 
 
 
-out.println("<form method=\"POST\" action=\"MinServlet\">");
+out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+
+out.println("<input type=\"text\" name=\"leaveLobby\" value=\"dontLeaveLobby\" readonly hidden/>");
 out.println("<input type=\"submit\" name=\"singleMultiTilbage\" value=\"Gå tilbage\"></form><br>");
 
 out.println("</body>");

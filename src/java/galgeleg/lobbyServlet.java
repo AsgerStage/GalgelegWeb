@@ -50,16 +50,19 @@ public class lobbyServlet extends HttpServlet {
             Service service = Service.create(url, qname);
             GalgelegI g = service.getPort(qnameport,GalgelegI.class);
             
- 
-
-out.println("<!DOCTYPE html>");
-out.println("<html>");
-out.println("<head>");
-out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">");
-out.println("<title>Galgeleg</title>");
-out.println("</head>");
-out.println("<body>");
-out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
+            
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">");
+            out.println("<title>Galgeleg</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
+            
+//AUTOREFRESHER hvert 5 sekundt.... midlertidig fix ?
+out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
 
 
 
@@ -68,24 +71,36 @@ out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 //        out.println("<p>"+i + ". " + g.getMultiListNames().get(i-1)+"</p>");
 
 out.println("<p>Her er en liste over alle lobbys</p><br>");
-    //Opret knapper til at joine spil
-    for (int i = 1; i < g.getMultiListNames().size()+1; i++) {
-        
-        String lobbyNavn = g.getMultiListNames().get(i-1);
-        lobbyNavn = lobbyNavn.substring(0,7);
-        out.println("<form method=\"POST\" action=\"joinLobbyServlet\">");
-        out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-        out.println("<input type=\"text\" name=\"lobbyNavn\" value="+lobbyNavn+" readonly hidden/>");
-        out.println("<input type=\"submit\" name=\"fortsæt\" value=\""+lobbyNavn+"'s lobby\"></form><br>");
-    }
+//Opret knapper til at joine spil
+for (int i = 1; i < g.getMultiListNames().size()+1; i++) {
     
+    String lobbyNavn = g.getMultiListNames().get(i-1);
+    lobbyNavn = lobbyNavn.substring(0,7);
     
-    //gå tilbage
+    String a = Integer.toString(i);
+    
+    out.println("<form method=\"POST\" action=\"joinLobbyServlet\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"lobbyNavn\" value="+lobbyNavn+" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"lobbyID\" value="+a+" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\""+lobbyNavn+"'s lobby\"></form><br>");
+}
+
+
+
+//gå tilbage            -- Fikser nogle problemer med en tom skærm hvis spillet var afsluttet men man forsøgte at leave en lobby alligevel...
+if (g.isMyMultiOver(name).contains("slut")){
     out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"leaveLobby\" value=\"dontLeaveLobby\" readonly hidden/>");
     out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
-    
-
+}
+if (!g.isMyMultiOver(name).contains("slut")){
+    out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
+    out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"leaveLobby\" value=\"leaveLobby\" readonly hidden/>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
+}
 
 
 
