@@ -68,7 +68,7 @@ public class waitingToStartLobbyServlet extends HttpServlet {
             
             
 //AUTOREFRESHER hvert 5 sekundt.... midlertidig fix ?
-//out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
+out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
 
 
 
@@ -91,10 +91,11 @@ out.println("<p>"+name+"'s lobby, vent på at flere spillere deltager...</p><br>
 //g.startGame(name);
 
 //Start spil
+if (g.enoughPlayers(name)) {
 out.println("<form method=\"POST\" action=\"spilMitMultiServlet\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
 out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Start spillet\"></form><br>");
-
+}
 //gå tilbage
 out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");

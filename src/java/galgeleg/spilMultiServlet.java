@@ -73,8 +73,8 @@ out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
 
 
-
-if (g.isMyMultiOver(name).contains("slut")){
+String hvemVandt = g.isMyMultiOver(name);
+if (hvemVandt.contains("slut")){
     //Hvis spillet er slut: lav en tilbageknap, announce hvem der vandt....
     out.println("<p>"+g.isMyMultiOver(name)+"</p><br>");
     
@@ -85,7 +85,7 @@ if (g.isMyMultiOver(name).contains("slut")){
     
 }
 
-if (!g.isMyMultiOver(name).contains("slut") && !g.isMyMultiActive(name)){
+if (!hvemVandt.contains("slut") && !g.isMyMultiActive(name)){
     out.println("<p>Venter på de andre spillere</p>");
 }
 
