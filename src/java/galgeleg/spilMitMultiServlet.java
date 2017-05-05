@@ -79,11 +79,11 @@ out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
 if (g.isMyMultiOver(name).contains("slut")){
     //Hvis spillet er slut: lav en tilbageknap, announce hvem der vandt....
     out.println("<p>"+g.isMyMultiOver(name)+"</p><br>");
-    
     out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"text\" name=\"leaveLobby\" value=\"dontLeaveLobby\" readonly hidden/>");
+    out.println("<input type=\"text\" name=\"leaveLobby\" value=\"clearLobby\" readonly hidden/>");
     out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
+
     
 }
 
