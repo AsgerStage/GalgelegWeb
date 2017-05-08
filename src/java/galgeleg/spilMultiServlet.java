@@ -76,7 +76,7 @@ out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
 String hvemVandt = g.isMyMultiOver(name);
 if (hvemVandt.contains("slut")){
     //Hvis spillet er slut: lav en tilbageknap, announce hvem der vandt....
-    out.println("<p>"+g.isMyMultiOver(name)+"</p><br>");
+    out.println("<p>"+hvemVandt+"</p><br>");
     
     out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");

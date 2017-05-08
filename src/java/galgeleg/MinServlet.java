@@ -54,6 +54,14 @@ Service service = Service.create(url, qname);
 GalgelegI g = service.getPort(qnameport,GalgelegI.class);
 
 
+try {
+    g.clearLobby(name);
+    g.leaveLobby(name);
+} catch (Exception e) {
+    
+}
+
+
 
 out.println("<!DOCTYPE html>");
 out.println("<html>");

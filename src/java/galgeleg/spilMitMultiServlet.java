@@ -72,25 +72,23 @@ out.println("<h1>Don Frankos Mobs Galgeleg</h1>");
 
 
 //AUTOREFRESHER hvert 5 sekundt.... midlertidig fix ?
-//out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
+out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
 
 
-String hvemVandt = g.isMyMultiOver(name);
+String hvemVandt = g.isMyMultiOverWithoutHighscore(name);
 if (hvemVandt.contains("slut")){
     //Hvis spillet er slut: lav en tilbageknap, announce hvem der vandt....
-    out.println("<p>"+hvemVandt+"</p><br>");
-    
-    out.println("<form method=\"POST\" action=\"multiplayerServlet\">");
+    out.println("<p>Vinderen er fundet! Fortsæt til næste side..</p><br>");
+    out.println("<form method=\"POST\" action=\"finishMitMultiServlet\">");
     out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
-    out.println("<input type=\"text\" name=\"leaveLobby\" value=\"clearLobby\" readonly hidden/>");
-    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Tilbage\"></form><br>");
+    out.println("<input type=\"submit\" name=\"fortsæt\" value=\"Jeg vil se vinderen!\"></form><br>");
 
     
 }
 
 if (!hvemVandt.contains("slut") && !g.isMyMultiActive(name)){
     out.println("<p>Venter på de andre spillere</p>");
-    out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
+//    out.println("<meta http-equiv=\"refresh\" content=\"5\" />");
 }
 
 if (g.isMyMultiActive(name)){
@@ -136,8 +134,8 @@ if (g.isMyMultiActive(name)){
     
 //g.playerCheck(name);
 
-out.println("<p>"+g.multiLog(name)+"</p>");
-out.println("<form method=\"POST\" action=\"spilMultiServlet\">");
+out.println("<p>"+g.multiLogWeb(name)+"</p>");
+out.println("<form method=\"POST\" action=\"spilMitMultiServlet\">");
 out.println("<p>Dit gæt: </p>");
 out.println("<input type=\"String\" id=\"guess\"  name=\"guess\" autofocus>   ");
 out.println("<input type=\"text\" name=\"name\" value="+name+" readonly hidden/>");
